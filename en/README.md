@@ -17,4 +17,4 @@ The IPC SDK, smart door lock SDK and sweeper SDK belong to the vertical category
 
 The architecture design is as follows:
 
-<img src="./resource/images/Integrated.jpg" alt="Architecture" style="zoom:60%;" />
+<img src="./resource/images/Integrated.png" alt="Architecture" style="zoom:60%;" />
