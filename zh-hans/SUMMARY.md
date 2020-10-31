@@ -11,17 +11,18 @@
 * [iOS 版本适配](./resource/iOSAdaptation.md)
 
 * [用户管理](./resource/User.md#用户管理)
-  
+
   - [手机账号体系](./resource/User.md#手机账号体系)
   - [邮箱账号体系](./resource/User.md#邮箱账号体系)
   - [用户 UID 登录体系](./resource/User.md#用户-uid-登录体系)
   - [第三方登录](./resource/User.md#第三方登录)
-  - [Auth2 登录](./resource/User.md#auth2登录)
+  - [Auth2登录](./resource/User.md#auth2登录)
+  - [匿名注册](./resource/User.md#匿名注册)
   - [修改用户信息](./resource/User.md#修改用户信息)
   - [退出登录，注销账号](./resource/User.md#退出登录，注销账号)
   - [用户数据模型](./resource/User.md#用户数据模型)
   - [Session 过期的处理](./resource/User.md#session-过期的处理)
-  
+
 * [家庭管理](./resource/HomeAbout.md)
   
   * [家庭关系管理](./resource/Home.md#家庭关系管理)
