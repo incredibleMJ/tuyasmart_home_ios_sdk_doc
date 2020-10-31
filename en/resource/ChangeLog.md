@@ -1,5 +1,12 @@
 # Change Log
 
+## 3.20.0(2020-10-30)
+
+- New Feature
+  - New guest user login mode
+  - Support new lightning active device
+  - Bug fixed
+
 ## 3.19.0(2020-09-21)
 
 - New Feature
