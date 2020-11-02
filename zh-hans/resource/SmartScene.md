@@ -1032,7 +1032,7 @@ TuyaSmartSceneDataFactory 中包涵以下创建工具类：
 |类名|说明|
 |---|---|
 |TuyaSmartScenePreConditionFactory|用于创建自动化场景的前置条件，如生效时间段。|
-TuyaSmartSceneConditionFactory|用于创建自动化场景的条件，如天气条件、设备条件。|
+|TuyaSmartSceneConditionFactory|用于创建自动化场景的条件，如天气条件、设备条件。|
 |TuyaSmartSceneActionFactory|用于创建场景动作，如设备动作。|
 
 以及两个辅助类：

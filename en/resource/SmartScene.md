@@ -979,7 +979,7 @@ TuyaSmartSceneDataFactory contains the following creation tool classes:
 | Class | Description |
 |---|---|
 |TuyaSmartScenePreConditionFactory| Pre-conditions for creating automation scenarios, such as the effective time period.|
-TuyaSmartSceneConditionFactory| Conditions for creating automated scenarios, such as weather conditions, device conditions. |
+|TuyaSmartSceneConditionFactory| Conditions for creating automated scenarios, such as weather conditions, device conditions. |
 |TuyaSmartSceneActionFactory| Used to create scene actions, such as device actions. |
 
 
