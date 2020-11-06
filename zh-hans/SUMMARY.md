@@ -55,8 +55,10 @@
   - [查询 Wi-Fi 信号强度](./resource/Device.md#查询-wi-fi-信号强度)
   - [获取网关下的子设备列表](./resource/Device.md#获取网关下的子设备列表)
   - [固件升级](./resource/Device.md#固件升级)
+  - [获取功能点历史上报⽇志](./resource/Device.md#获取功能点历史上报⽇志)
   
 * [多控关联](./resource/MultiControl.md#多控关联)
+  
   - [概述](./resource/MultiControl.md#概述)
   - [业务流程图](./resource/MultiControl.md#业务流程图)
   - [获取设备的 dp 信息](./resource/MultiControl.md#获取设备的-dp-信息)
