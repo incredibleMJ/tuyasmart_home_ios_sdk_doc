@@ -355,7 +355,7 @@ TuyaSmartUser.sharedInstance()?.checkCode(withUserName: "email_or_phone_number",
 
 ## 邮箱账号体系
 
-涂鸦智能提供手机验证码登录体系。
+涂鸦智能提供邮箱验证码登录体系。
 
 
 
