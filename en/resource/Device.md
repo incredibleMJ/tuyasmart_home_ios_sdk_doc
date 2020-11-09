@@ -736,7 +736,7 @@ func device(_ device: TuyaSmartDevice!, firmwareUpgradeProgress type: Int, progr
 }
 ```
 
-## Fetch the log of DP report
+## Fetch the Log of DP Report
 
 Fetch the recent log of the DP report. It is only available for the result of 7 days, if you need more days' results, please refer to the [common interface](./CommonInterface.md).
 
