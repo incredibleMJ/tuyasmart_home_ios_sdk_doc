@@ -44,6 +44,7 @@
   - [Obtain Wi-Fi Signal Strength](./resource/Device.md#obtain-wi-fi-signal-strength)
   - [Obtain the Sub-Device List of a Gateway](./resource/Device.md#obtain-the-sub-device-list-of-a-gateway)
   - [Firmware Upgrade](./resource/Device.md#firmware-upgrade)
+  - [Fetch the Log of DP Report](./resource/Device.md#fetch-the-log-of-dp-report)
 * [Device Multi-Control](./resource/MultiControl.md#device-multi-control)
     - [Overview](./resource/MultiControl.md#overview)
     - [Bussiness Flowchart](./resource/MultiControl.md#bussiness-flowchart)
