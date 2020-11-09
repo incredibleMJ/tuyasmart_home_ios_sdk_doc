@@ -308,7 +308,7 @@ Verification verification code, used for verification verification during regist
 
 **Parameters**
 
-| 参数        | 说明                                                         |
+| Param   | Description  |
 | :---------- | :----------------------------------------------------------- |
 | userName    | Phone number or email                                        |
 | region      | Region, default value is nil                                 |
@@ -582,7 +582,7 @@ Verification verification code, used for verification verification during regist
 
 **Parameters**
 
-| 参数        | 说明                                                         |
+| Param        | Description                                                         |
 | :---------- | :----------------------------------------------------------- |
 | userName    | Phone number or email                                        |
 | region      | Region, default value is nil                                 |
