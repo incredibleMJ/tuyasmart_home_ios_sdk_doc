@@ -736,3 +736,130 @@ func device(_ device: TuyaSmartDevice!, firmwareUpgradeProgress type: Int, progr
 }
 ```
 
+## Fetch the log of DP report
+
+Fetch the recent log of the DP report. It is only available for the result of 7 days, if you need more days' results, please refer to the [common interface](./CommonInterface.md).
+
+**Description**
+
+| Name | Version | Description |
+| ------------ | ------------- | ------------ |
+| tuya.m.smart.operate.all.log | 1.0 | Fetch the log of DP report |
+
+**Parameters**
+
+| Name | Type | Description | Is Required? |
+| ------------ | ------------- | ------------ | ------------ |
+| devId | String | Device ID | true|
+| dpIds | String | The DP id for querying, splitted by comma. For example: `@“1，2”` | true|
+| offset | Integer | The offset of pagination | true|
+| limit | Integer | The number of fetched data per page | true|
+| startTime | String | The start time for the query (unit in milliseconds) | false|
+| endTime | String | The end time for the query (unit in milliseconds) | false|
+| sortType | String | The order of sorted results, sorted by time. (`ASC` or `DESC`, Default is `DESC`) | false|
+
+##### Request Example
+```
+{
+  "devId" : "05200020b4e62d16ce8b",
+  "dpIds" : "1,2",
+  "offset" : 0,
+  "limit" : 10,
+  "startTime" : "1542800401000",
+  "endTime" : "1542886801000",
+  "sortType" : "DESC"
+}
+```
+##### Response Example
+```
+{
+  "result" : {
+    "total" : 11055,
+    "dps" : [ {
+      "timeStamp" : 1542829972,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:52",
+      "value" : "311"
+    }, {
+      "timeStamp" : 1542829970,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:50",
+      "value" : "323"
+    }, {
+      "timeStamp" : 1542829966,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:46",
+      "value" : "230"
+    }, {
+      "timeStamp" : 1542829964,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:44",
+      "value" : "231"
+    }, {
+      "timeStamp" : 1542829960,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:40",
+      "value" : "307"
+    }, {
+      "timeStamp" : 1542829958,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:38",
+      "value" : "320"
+    }, {
+      "timeStamp" : 1542829954,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:34",
+      "value" : "229"
+    }, {
+      "timeStamp" : 1542829950,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:30",
+      "value" : "325"
+    }, {
+      "timeStamp" : 1542829948,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:28",
+      "value" : "292"
+    }, {
+      "timeStamp" : 1542829942,
+      "dpId" : 5,
+      "timeStr" : "2018-11-21 20:52:22",
+      "value" : "231"
+    } ],
+    "hasNext" : true
+  },
+  "t" : 1542959314632,
+  "success" : true,
+  "status" : "ok"
+}
+```
+
+**Example**
+
+Objc:
+
+```objc
+- (void)getOperationLogList {
+  
+  [[TuyaSmartRequest new] requestWithApiName:@"tuya.m.smart.operate.all.log" postData:@{@"devId":@"", @"dpIds", @"1", @"offset":@(0), @"limit":@(10)} version:@"1.0" success:^(id result) {
+
+  } failure:^(NSError *error) {
+
+  }];
+
+}
+```
+
+Swift:
+
+```swift
+func getOperationLogList() {
+
+    TuyaSmartRequest().init(apiName: "tuya.m.smart.operate.all.log", postData: [:], version: "1.0", success: { result in
+
+    }, failure: { error in
+
+    })
+
+}
+```
