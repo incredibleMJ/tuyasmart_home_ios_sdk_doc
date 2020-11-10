@@ -16,7 +16,7 @@
 
 **接口说明**
 
-录制视频保存到指定路径
+录制视频保存到指定路径，p2p 1.0 设备不支持
 
 ```objc
 - (void)startRecordWithFilePath:(NSString *)filePath;
@@ -24,9 +24,9 @@
 
 **参数说明**
 
-| 参数     | 说明               |
-| -------- | ------------------ |
-| filePath | 保存视频的文件路径 |
+| 参数     | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| filePath | 保存视频的文件路径，视频保存为 mp4 文件，文件路径需要有 “.mp4” 后缀 |
 
 **接口说明**
 
@@ -155,7 +155,7 @@ func camera(_ camera: TuyaSmartCameraType!, didOccurredErrorAtStep errStepCode: 
 
 **接口说明**
 
-视频截图，图片保存在指定文件路径
+视频截图，图片保存在指定文件路径，p2p 1.0 设备不支持
 
 ```objc
 - (UIImage *)snapShootSavedAtPath:(NSString *)filePath thumbnilPath:(NSString *)thumbnilPath;
@@ -439,7 +439,43 @@ func camera(_ camera: TuyaSmartCameraType!, didOccurredErrorAtStep errStepCode: 
 | camera | 清晰度变化的 Camera 对象                  |
 | isHd   | 当前的清晰度状态，`YES`：高清，`NO`：标清 |
 
+以上三个接口在 3.20.0 版本中已废弃（p2p 1.0 设备继续使用），用下面三个接口替代（p2p 1.0 设备不支持）。
 
+**接口说明**
+
+获取视频清晰度
+
+```objc
+- (void)getDefinition;
+```
+
+**接口说明**
+
+设置视频清晰度
+
+```objc
+- (void)setDefinition:(TuyaSmartCameraDefinition)definition;
+```
+
+**接口说明**
+
+视频清晰度状态变化代理回调
+
+```objc
+- (void)camera:(id<TuyaSmartCameraType>)camera definitionChanged:(TuyaSmartCameraDefinition)definition;
+```
+
+**TuyaSmartCameraDefinition 枚举**
+
+| 值                                | 描述   |
+| --------------------------------- | ------ |
+| TuyaSmartCameraDefinitionProflow  | 省流量 |
+| TuyaSmartCameraDefinitionStandard | 标清   |
+| TuyaSmartCameraDefinitionHigh     | 高清   |
+| TuyaSmartCameraDefinitionSuper    | 超清   |
+| TuyaSmartCameraDefinitionSSuper   | 超超清 |
+
+> 不同的清晰度，需要设备端支持，目前普遍设备只支持标清和高清两种清晰度。
 
 **示例代码**
 

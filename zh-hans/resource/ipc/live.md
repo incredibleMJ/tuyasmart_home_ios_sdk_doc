@@ -54,6 +54,12 @@ p2p 通道连接成功以后，就可以开始播放实时视频了。
 - (void)startPreview;
 ```
 
+开始播放实时视频，并指定清晰度，p2p 1.0 设备不支持
+
+```objc
+- (void)startPreviewWithDefinition:(TuyaSmartCameraDefinition)definition;
+```
+
 停止播放实时视频
 
 ```objc

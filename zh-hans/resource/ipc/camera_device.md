@@ -105,7 +105,7 @@ IPC SDK 提供创建摄像机配置对象和摄像机控制对象的工厂方法
 | -------- | -------------------------------------------------------- |
 | uid      | 用户 `uid`，通过`[TuyaSmartUser sharedInstance].uid`获取 |
 | localKey | 设备的密钥，通过`TuyaSmartDeviceModel.localKey`获取      |
-| data     | 通过`tuya.m.ipc.config.get`接口获取到的配置信息          |
+| data     | 通过`tuya.m.rtc.session.init`接口获取到的配置信息        |
 
 **返回值**
 
