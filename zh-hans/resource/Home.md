@@ -1358,6 +1358,11 @@ func saveBatchRoomRelation() {
                                 failure:(TYFailureError)failure;
 ```
 
+如果获取不到相关方法，可以添加以下代码：
+```
+#import <TuyaSmartDeviceKit/TuyaSmartHome+Weather.h>
+```
+
 **参数说明**
 
 
