@@ -308,7 +308,7 @@ Verification verification code, used for verification verification during regist
 
 **Parameters**
 
-| 参数        | 说明                                                         |
+| Param   | Description  |
 | :---------- | :----------------------------------------------------------- |
 | userName    | Phone number or email                                        |
 | region      | Region, default value is nil                                 |
@@ -582,7 +582,7 @@ Verification verification code, used for verification verification during regist
 
 **Parameters**
 
-| 参数        | 说明                                                         |
+| Param        | Description                                                         |
 | :---------- | :----------------------------------------------------------- |
 | userName    | Phone number or email                                        |
 | region      | Region, default value is nil                                 |
@@ -1074,7 +1074,6 @@ func loginWithGoogle() {
 }
 ```
 
-
 ## Anonymous registration
 
 ### Anonymous registration
@@ -1092,12 +1091,12 @@ SDK provides anonymous registration to log in, passing parameters: usename, anon
 
 **Parameters**
 
-| Params        | Type |Description                                 |
-| :---------- | :-------- |:----------------------------------- |
-| countryCode | NSString* | Country code, 86: China, 1: USA      |
-| userName    | NSString*  | Nickname of anonymous login  (for example: device name)      |
-| success     |TYSuccessHandler| Success Callback                       |
-| failure     |TYFailureError| Failure Callback    |
+| Params      | Type             | Description                                             |
+| :---------- | :--------------- | :------------------------------------------------------ |
+| countryCode | NSString*        | Country code, 86: China, 1: USA                         |
+| userName    | NSString*        | Nickname of anonymous login  (for example: device name) |
+| success     | TYSuccessHandler | Success Callback                                        |
+| failure     | TYFailureError   | Failure Callback                                        |
 
 
 **Example**
@@ -1149,10 +1148,10 @@ Users who log in anonymously can log out through this interface. Anonymous accou
 
 **Parameters**
 
-| Params        | Type |Description                                 |
-| :---------- | :-------- |:----------------------------------- |
-| success     |TYSuccessHandler| Success Callback                      |
-| failure     |TYFailureError| Failure Callback |
+| Params  | Type             | Description      |
+| :------ | :--------------- | :--------------- |
+| success | TYSuccessHandler | Success Callback |
+| failure | TYFailureError   | Failure Callback |
 
 
 **Example**
@@ -1203,14 +1202,14 @@ There are usually two steps to perfecting information:
 
 **Parameters**
 
-| Params        | Type |Description                                 |
-| :---------- | :-------- |:----------------------------------- |
-| countryCode  |NSString* | Country code（For example: 1, USA; 86, China）                 |
-| userName  |NSString* | User's phone number or email              |
-| code  |NSString* | Verification code                |
-| password  |NSString* | Password                |
-| success     |TYSuccessHandler| Success Callback                 |
-| failure     |TYFailureError| Failure Callback |
+| Params      | Type             | Description                                    |
+| :---------- | :--------------- | :--------------------------------------------- |
+| countryCode | NSString*        | Country code（For example: 1, USA; 86, China） |
+| userName    | NSString*        | User's phone number or email                   |
+| code        | NSString*        | Verification code                              |
+| password    | NSString*        | Password                                       |
+| success     | TYSuccessHandler | Success Callback                               |
+| failure     | TYFailureError   | Failure Callback                               |
 
 
 **Example**
@@ -1252,8 +1251,6 @@ TuyaSmartUser.sharedInstance().usernameBinding(withCountryCode: countryCode, use
 
 
 ```
-
-
 
 ## Modify User Info
 

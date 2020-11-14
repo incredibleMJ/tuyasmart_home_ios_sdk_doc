@@ -468,7 +468,7 @@ SIG Mesh 设备的在线情况分为两种
 | meshId         | meshId |
 | localId         | 群组的本地短地址, 2 字节的 hex string |
 | pcc         | 群组设备大小类 |
-| success         | 成功回调 localid 10 进制       |
+| success         | 成功回调，group id   |
 | failure         | 失败回调       |
 
 

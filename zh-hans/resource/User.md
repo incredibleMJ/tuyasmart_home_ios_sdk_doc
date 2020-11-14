@@ -355,7 +355,7 @@ TuyaSmartUser.sharedInstance()?.checkCode(withUserName: "email_or_phone_number",
 
 ## 邮箱账号体系
 
-涂鸦智能提供手机验证码登录体系。
+涂鸦智能提供邮箱验证码登录体系。
 
 
 
@@ -1024,7 +1024,6 @@ func loginWithGoogle() {
 }
 ```
 
-
 ## 匿名注册
 
 ### 匿名注册登录
@@ -1042,12 +1041,12 @@ SDK提供匿名注册的方式登录，传参：usename，匿名登录昵称；c
 
 **参数说明**
 
-| 参数        | 类型 |说明                                 |
-| :---------- | :-------- |:----------------------------------- |
-| countryCode | NSString* | 国家码，86：中国，1：美      |
-| userName    | NSString*  | 匿名登录昵称（例如：设备名称）      |
-| success     |TYSuccessHandler| 接口发送成功回调                     |
-| failure     |TYFailureError| 接口发送失败回调，error 表示失败原因 |
+| 参数        | 类型             | 说明                                 |
+| :---------- | :--------------- | :----------------------------------- |
+| countryCode | NSString         | 国家码，86：中国，1：美              |
+| userName    | NSString         | 匿名登录昵称（例如：设备名称）       |
+| success     | TYSuccessHandler | 接口发送成功回调                     |
+| failure     | TYFailureError   | 接口发送失败回调，error 表示失败原因 |
 
 
 **实例代码**
@@ -1099,10 +1098,10 @@ TuyaSmartUser.sharedInstance().registerAnonymous(withCountryCode: countryCode,
 
 **参数说明**
 
-| 参数        | 类型 |说明                                 |
-| :---------- | :-------- |:----------------------------------- |
-| success     |TYSuccessHandler| 接口发送成功回调                     |
-| failure     |TYFailureError| 接口发送失败回调，error 表示失败原因 |
+| 参数    | 类型             | 说明                                 |
+| :------ | :--------------- | :----------------------------------- |
+| success | TYSuccessHandler | 接口发送成功回调                     |
+| failure | TYFailureError   | 接口发送失败回调，error 表示失败原因 |
 
 
 **实例代码**
@@ -1153,14 +1152,14 @@ TuyaSmartUser.sharedInstance().deleteAnonymousAccount(withSuccess: {
 
 **参数说明**
 
-| 参数        | 类型 |说明                                 |
-| :---------- | :-------- |:----------------------------------- |
-| countryCode  |NSString* | 国家码（例如：1，美国；86，中国）                 |
-| userName  |NSString* | 用户绑定的手机号码或者邮箱                |
-| code  |NSString* | 验证码                 |
-| password  |NSString* | 设置密码                 |
-| success     |TYSuccessHandler| 接口发送成功回调                  |
-| failure     |TYFailureError| 接口发送失败回调，error 表示失败原因 |
+| 参数        | 类型             | 说明                                 |
+| :---------- | :--------------- | :----------------------------------- |
+| countryCode | NSString*        | 国家码（例如：1，美国；86，中国）    |
+| userName    | NSString*        | 用户绑定的手机号码或者邮箱           |
+| code        | NSString*        | 验证码                               |
+| password    | NSString*        | 设置密码                             |
+| success     | TYSuccessHandler | 接口发送成功回调                     |
+| failure     | TYFailureError   | 接口发送失败回调，error 表示失败原因 |
 
 
 **实例代码**

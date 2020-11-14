@@ -3,7 +3,7 @@
 
 ## Home SDK
 
-Tuya Smart iOS Home SDK is the iOS 9.0 and above version provided by Tuya for the field of smart home. iOS developers can quickly develop app functions based on SDK, realize the activation of intelligent hardware, hardware control, firmware upgrades, timed tasks, intelligent scenarios and other operations.
+Home SDK is designed for the field of smart home provided by Tuya, avaliable for iOS 9.0 and above versions. iOS developers can quickly develop apps based on the SDK for smart device networking, control, firmware upgrades, timing tasks, smart scenes and more.
 
 The SDK includes the following features:
 
@@ -17,4 +17,4 @@ The IPC SDK, smart door lock SDK and sweeper SDK belong to the vertical category
 
 The architecture design is as follows:
 
-<img src="./resource/images/Integrated.jpg" alt="Architecture" style="zoom:60%;" />
+<img src="./resource/images/Integrated.png" alt="Architecture" style="zoom:60%;" />

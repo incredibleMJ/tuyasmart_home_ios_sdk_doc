@@ -11,18 +11,18 @@
 * [iOS 版本适配](./resource/iOSAdaptation.md)
 
 * [用户管理](./resource/User.md#用户管理)
-  
+
   - [手机账号体系](./resource/User.md#手机账号体系)
   - [邮箱账号体系](./resource/User.md#邮箱账号体系)
   - [用户 UID 登录体系](./resource/User.md#用户-uid-登录体系)
   - [第三方登录](./resource/User.md#第三方登录)
-  - [Auth2 登录](./resource/User.md#auth2登录)
+  - [Auth2登录](./resource/User.md#auth2登录)
   - [匿名注册](./resource/User.md#匿名注册)
   - [修改用户信息](./resource/User.md#修改用户信息)
   - [退出登录，注销账号](./resource/User.md#退出登录，注销账号)
   - [用户数据模型](./resource/User.md#用户数据模型)
   - [Session 过期的处理](./resource/User.md#session-过期的处理)
-  
+
 * [家庭管理](./resource/HomeAbout.md)
   
   * [家庭关系管理](./resource/Home.md#家庭关系管理)
@@ -55,8 +55,10 @@
   - [查询 Wi-Fi 信号强度](./resource/Device.md#查询-wi-fi-信号强度)
   - [获取网关下的子设备列表](./resource/Device.md#获取网关下的子设备列表)
   - [固件升级](./resource/Device.md#固件升级)
+  - [获取功能点历史上报⽇志](./resource/Device.md#获取功能点历史上报⽇志)
   
 * [多控关联](./resource/MultiControl.md#多控关联)
+  
   - [概述](./resource/MultiControl.md#概述)
   - [业务流程图](./resource/MultiControl.md#业务流程图)
   - [获取设备的 dp 信息](./resource/MultiControl.md#获取设备的-dp-信息)

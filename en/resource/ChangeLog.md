@@ -1,5 +1,20 @@
 # Change Log
 
+## 3.20.0(2020-10-30)
+
+- New Feature
+  - New guest user login mode
+  - Support new lightning active device
+  - Bug fixed
+
+## 3.19.0(2020-09-21)
+
+- New Feature
+  - New timing interface function
+  - The room supports changing custom pictures
+  - Added device dps time for device attributes, which can record the time corresponding to the nearest change of dp
+  - Bug fixed
+
 ## 3.17.6(2020-07-09)
 
 - New Feature
