@@ -16,7 +16,7 @@ Record the video and save it to the phone system album.
 
 **Declaration**
 
-Save the recorded video to the specified path.
+Save the recorded video to the specified path. P2p 1.0 dose not support.
 
 ```objc
 - (void)startRecordWithFilePath:(NSString *)filePath;
@@ -24,9 +24,9 @@ Save the recorded video to the specified path.
 
 **Parameters**
 
-| Parameter | Description              |
-| --------- | ------------------------ |
-| filePath  | Save the video file path |
+| Parameter | Description                                         |
+| --------- | --------------------------------------------------- |
+| filePath  | File path to save the video, mast has suffix '.mp4' |
 
 **Declaration**
 
@@ -156,7 +156,7 @@ Video screenshot, picture saved in the phone system album.
 
 **Declaration**
 
-Video screenshot, image saved in the specified file path.
+Video screenshot, image saved in the specified file path. P2p 1.0 dose not support.
 
 ```objc
 - (UIImage *)snapShootSavedAtPath:(NSString *)filePath thumbnilPath:(NSString *)thumbnilPath;
@@ -439,7 +439,43 @@ Video definition state changed.
 | camera    | Camera                            |
 | isHd      | Definition state of current video |
 
+The above three interfaces are deprecated in version 3.20.0 (p2p 1.0 devices continue to be used), replace them with the following three interfaces (p2p 1.0 devices do not support).
 
+**Declaration**
+
+Get definition of video
+
+```objc
+- (void)getDefinition;
+```
+
+**Declaration**
+
+Change definition of video
+
+```objc
+- (void)setDefinition:(TuyaSmartCameraDefinition)definition;
+```
+
+**Declaration**
+
+Definition changed callback by delegate
+
+```objc
+- (void)camera:(id<TuyaSmartCameraType>)camera definitionChanged:(TuyaSmartCameraDefinition)definition;
+```
+
+**TuyaSmartCameraDefinition Enum**
+
+| Value                             | Description       |
+| --------------------------------- | ----------------- |
+| TuyaSmartCameraDefinitionProflow  | Save data         |
+| TuyaSmartCameraDefinitionStandard | SD                |
+| TuyaSmartCameraDefinitionHigh     | HD                |
+| TuyaSmartCameraDefinitionSuper    | Ultra-clear       |
+| TuyaSmartCameraDefinitionSSuper   | Super ultra-clear |
+
+> Different resolutions need to be supported by the device. Currently, devices generally only support SD and HD.
 
 **Example**
 
@@ -447,15 +483,16 @@ ObjC
 
 ```objc
 - (void)changeHD {
-  	[self.camera enableHD:!self.HD];
+  	TuyaSmartCameraDefinition definition = self.HD ? TuyaSmartCameraDefinitionStandard : TuyaSmartCameraDefinitionHigh;
+		[self.camera setDefinition:definition];
 }
 
 - (void)camera:(id<TuyaSmartCameraType>)camera resolutionDidChangeWidth:(NSInteger)width height:(NSInteger)height {
-    [self.camera getHD];
+    [self.camera getDefinition];
 }
 
-- (void)camera:(id<TuyaSmartCameraType>)camera didReceiveDefinitionState:(BOOL)isHd {
-    self.HD = isHd;
+- (void)camera:(id<TuyaSmartCameraType>)camera definitionChanged:(TuyaSmartCameraDefinition)definition {
+    self.HD = definition >= TuyaSmartCameraDefinitionHigh;
 }
 
 - (void)camera:(id<TuyaSmartCameraType>)camera didOccurredErrorAtStep:(TYCameraErrorCode)errStepCode specificErrorCode:(NSInteger)errorCode {
@@ -470,15 +507,16 @@ Swift
 
 ```swift
 func changeHD() {
-  	self.camera.enableHD(true)
+  	let definition = self.isHD ? TuyaSmartCameraDefinition.standard : TuyaSmartCameraDefinition.high
+    self.camera.setDefinition(definition)
 }
 
 func camera(_ camera: TuyaSmartCameraType!, resolutionDidChangeWidth width: Int, height: Int) {
-    self.camera.getHD()
+    self.camera.getDefinition()
 }
 
-func camera(_ camera: TuyaSmartCameraType!, didReceiveDefinitionState isHd: Bool) {
-    self.isHD = isHd
+func camera(_ camera: TuyaSmartCameraType!, definitionChanged definition: TuyaSmartCameraDefinition) {
+		self.isHD = definition.rawValue >= TuyaSmartCameraDefinition.high.rawValue
 }
 
 func camera(_ camera: TuyaSmartCameraType!, didOccurredErrorAtStep errStepCode: TYCameraErrorCode, specificErrorCode errorCode: Int) {
@@ -551,3 +589,32 @@ func camera(_ camera: TuyaSmartCameraType!, ty_didReceiveVideoFrame sampleBuffer
 		// ...
 }
 ```
+
+### Object outline
+
+After the Object outline function is turned on, during the live video playing, if the device detects a moving object, it will draw a white rectangular frame on the corresponding object.
+
+First, you need to turn on the Object outline function of the device. After it is turned on, the device will send the coordinates of the moving object along with the video frame. Use the DP point "198" to turn on the Object outline function on the device.
+
+```objc
+if ([self.dpManager isSupportDP:@"198"]) {
+    [self.dpManager setValue:@(YES) forDP:@"198" success:nil failure:nil];
+}
+```
+
+Under the premise that the Object outline function on the device side is enabled, the Object outline function of the IPC SDK needs to be turned on when the live video is played. The SDK will draw a rectangular frame on the video image according to the coordinates of the moving object sent by the device.
+
+**Declaration**
+
+Enable Object ounline function
+
+```objc
+- (void)setOutLineEnable:(BOOL)enable;
+```
+
+**Parameters**
+
+| Parameter | Description                        |
+| --------- | ---------------------------------- |
+| enable    | Whether to open the Object outline |
+

@@ -158,7 +158,6 @@ ObjC
 }
 
 - (void)openOSD {
-  	s
     if ([self.dpManager isSupportDP:TuyaSmartCameraBasicOSDDPName]) {
         [self.dpManager setValue:@(YES) forDP:TuyaSmartCameraBasicOSDDPName success:^(id result) {
           	self.osdSwitch = [result boolValue];

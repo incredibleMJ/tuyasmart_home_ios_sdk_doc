@@ -483,18 +483,19 @@ ObjC
 
 ```objc
 - (void)changeHD {
-		[self.camera enableHD:!self.HD];
+		TuyaSmartCameraDefinition definition = self.HD ? TuyaSmartCameraDefinitionStandard : TuyaSmartCameraDefinitionHigh;
+		[self.camera setDefinition:definition];
 }
 
 // 视频分辨率改变的代理方法，实时视频直播或者录像回放刚开始时也会调用
 - (void)camera:(id<TuyaSmartCameraType>)camera resolutionDidChangeWidth:(NSInteger)width height:(NSInteger)height {
 		// 获取当前的清晰度
-    [self.camera getHD];
+		[self.camera getDefinition];
 }
 
 // 清晰度状态代理方法
-- (void)camera:(id<TuyaSmartCameraType>)camera didReceiveDefinitionState:(BOOL)isHd {
-    self.HD = isHd;
+- (void)camera:(id<TuyaSmartCameraType>)camera definitionChanged:(TuyaSmartCameraDefinition)definition {
+    self.HD = definition >= TuyaSmartCameraDefinitionHigh;
 }
 
 - (void)camera:(id<TuyaSmartCameraType>)camera didOccurredErrorAtStep:(TYCameraErrorCode)errStepCode specificErrorCode:(NSInteger)errorCode {
@@ -509,17 +510,18 @@ Swift
 
 ```swift
 func changeHD() {
-    self.camera.enableHD(true)
+  	let definition = self.isHD ? TuyaSmartCameraDefinition.standard : TuyaSmartCameraDefinition.high
+    self.camera.setDefinition(definition)
 }
 
 // 视频分辨率改变的代理方法，实时视频直播或者录像回放刚开始时也会调用
 func camera(_ camera: TuyaSmartCameraType!, resolutionDidChangeWidth width: Int, height: Int) {
     // 获取当前的清晰度
-    self.camera.getHD()
+    self.camera.getDefinition()
 }
 
-func camera(_ camera: TuyaSmartCameraType!, didReceiveDefinitionState isHd: Bool) {
-    self.isHD = isHd
+func camera(_ camera: TuyaSmartCameraType!, definitionChanged definition: TuyaSmartCameraDefinition) {
+		self.isHD = definition.rawValue >= TuyaSmartCameraDefinition.high.rawValue
 }
 
 func camera(_ camera: TuyaSmartCameraType!, didOccurredErrorAtStep errStepCode: TYCameraErrorCode, specificErrorCode errorCode: Int) {
@@ -593,3 +595,32 @@ func camera(_ camera: TuyaSmartCameraType!, ty_didReceiveVideoFrame sampleBuffer
 		// 处理并渲染视频数据
 }
 ```
+
+### 智能画框
+
+开启智能画框功能后，在视频直播的过程中，如果设备检查到移动物体，会在对应的物体上画一个白色的矩形框。
+
+首先需要开启设备的智能画框功能，在开启后，设备会随着视频帧发送移动物体的坐标，通过 DP 点 "198" 来开启设备端的智能画框功能。
+
+```objc
+if ([self.dpManager isSupportDP:@"198"]) {
+    [self.dpManager setValue:@(YES) forDP:@"198" success:nil failure:nil];
+}
+```
+
+在设备端智能画框功能开启的前提下，直播视频播放时，需要打开 IPC SDK 的智能画框功能，SDK 会根据设备发送的移动物体坐标在视频图像上绘制矩形框。
+
+**接口说明**
+
+智能画框功能开关
+
+```objc
+- (void)setOutLineEnable:(BOOL)enable;
+```
+
+**参数说明**
+
+| 参数   | 说明             |
+| ------ | ---------------- |
+| enable | 是否开启智能画框 |
+

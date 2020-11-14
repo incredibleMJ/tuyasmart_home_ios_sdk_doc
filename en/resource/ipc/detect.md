@@ -187,40 +187,72 @@ Batch delete alarm message.
 
 Depending on the message type, there may be different attachments. The `attachPic` property gets the url of the image attachment, and the `attachVideos` property gets the urls of the video attachments. Normally, this property has only one element.
 
-> The image attachment in the alarm message is encrypted and needs to be displayed using the encrypted image component `TYEncryptImage`. For details, refer to the [Encrypted Image](./encryptImage.md) chapter.
+### Encrypted image
 
-## Video message
-
-The video attachment in the video message is the encrypted video, which needs to be played through the interface provided by `TuyaSmartCloudManager`. the string element in `attachVideos` is component by url + "@" + encrypt key, like "url@key", When playing a video, need to pass in both the video url and the encrypt key.
+In order to ensure the privacy and security of data, you can choose to use encrypted picture messages.
 
 **Declaration**
 
-Play video of message.
+Enable image encryption, the default is off. After opening, the pictures carried in the message will be encrypted, you need to use the `TYEncryptImage` component to display the pictures, refer to [Encrypt Image](./encryptImage.md).
 
 ```objc
-- (int)playVideoMessageWithUrl:(NSString *)url 
-  									 startTime:(int)nStartTime 
-                    encryptKey:(NSString *)encryptKey 
-                    onResponse:(void (^)(int errCode))callback 
-                      onFinish:(void (^)(int errCode))finihedCallBack;
+@property (nonatomic, assign) BOOL enableEncryptedImage;
+```
+
+## Video message
+
+The video attachment in the video message is the encrypted video, which needs to be played through the interface provided by `TuyaSmartCameraKit/TuyaSmartCameraMessageMediaPlayer`.
+
+**Declaration**
+
+Get video view
+
+```objc
+- (UIView<TuyaSmartVideoViewType> *)videoView;
+```
+
+**Declaration**
+
+Play attachments in alarm messages
+
+```objc
+- (void)playMessage:(TuyaSmartCameraMessageModel *)messageModel attachmentType:(TuyaCameraMessageAttachmentType)attachmentType success:(void(^)(void))success failure:(void(^)(int errCode))failure finished:(void(^)(int errCode))onFinish;
 ```
 
 **Parameters**
 
-| Parameter        | Description                                     |
-| ---------------- | ----------------------------------------------- |
-| url              | Video url                                       |
-| nStartTime       | Second to start play                            |
-| encryptKey       | Encrypt key                                     |
-| callback         | Result callback, errCode is 0 indicates success |
-| finishedCallBack | Finished callback                               |
+| Parameter      | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| messageModel   | Detect message mode                                          |
+| attachmentType | The type of attachment that needs to be played. The warning message may include video messages and audio messages |
+| success        | Success callback                                             |
+| failure        | Failure callback                                             |
+| onFinish       | Finished callback, errCode indicates the error code, 0 means the end of normal playback |
 
 **Declaration**
 
-Pause playing.
+Play attachment in alarm message
 
 ```objc
-- (int)pausePlayVideoMessage;
+- (void)playMessageAttachment:(NSString *)attachmentPath type:(TuyaCameraMessageAttachmentType)attachmentType success:(void(^)(void))success failure:(void(^)(int errCode))failure finished:(void(^)(int errCode))onFinish;
+```
+
+**Parameters**
+
+| Parameter      | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| attachmentPath | The url of the attachment                                    |
+| attachmentType | The type of the attachment                                   |
+| success        | Success callback                                             |
+| failure        | Failure callback                                             |
+| onFinish       | Finished callback, errCode indicates the error code, 0 means the end of normal playback |
+
+**Declaration**
+
+Pause playing
+
+```objc
+- (int)pausePlay:(TuyaCameraMessageAttachmentType)attachmentType;
 ```
 
 **Declaration**
@@ -228,7 +260,7 @@ Pause playing.
 Resume playing.
 
 ```objc
-- (int)resumePlayVideoMessage;
+- (int)resumePlay:(TuyaCameraMessageAttachmentType)attachmentType;
 ```
 
 **Declaration**
@@ -236,8 +268,24 @@ Resume playing.
 Stop playing.
 
 ```objc
-- (int)stopPlayVideoMessage;
+- (void)stopPlay:(TuyaCameraMessageAttachmentType)attachmentType;
 ```
+
+**Declaration**
+
+Mute enable
+
+```objc
+- (void)enableMute:(BOOL)mute success:(void(^)(void))success failure:(void (^)(NSError * error))failure;
+```
+
+**Parameters**
+
+| Parameter | Description      |
+| --------- | ---------------- |
+| mute      | Whether to mute  |
+| success   | Success callback |
+| failure   | Failure callback |
 
 
 
@@ -249,24 +297,46 @@ Stop playing.
 
 
 
-The playback of the video message is similar to the playback of the cloud video. When the video frame is received, there will be a video frame data delegate callback.
+**TuyaSmartCameraMessageMediaPlayerDelegate**
+
+Message media player delegate protocol.
+
+**Declaration**
+
+Video frame data callback
 
 ```objc
-- (void)cloudManager:(TuyaSmartCloudManager *)cloudManager 
-  	didReceivedFrame:(CMSampleBufferRef)frameBuffer 
-      videoFrameInfo:(TuyaSmartVideoFrameInfo)frameInfo;
+- (void)mediaPlayer:(TuyaSmartCameraMessageMediaPlayer *)player didReceivedFrame:(CMSampleBufferRef)frameBuffer videoFrameInfo:(TuyaSmartVideoFrameInfo)frameInfo;
 ```
 
-The following two attributes in the structure `TuyaSmartVideoFrameInfo` describe the total length and progress of the video in milliseconds.
+**Parameters**
 
-* **nDuration** : video length
-* **nProgress** : progress of current video
+| Parameter           | Description          |
+| ------------------- | -------------------- |
+| player              | Media player object  |
+| frameBuffer         | Video frame YUV data |
+| frameInfo           | Video frame info     |
+| frameInfo.nDuration | Video total time     |
+| frameInfo.nProgress | Video play progress  |
 
-The video sound switch, like cloud video, use the following interface:
+**Declaration**
+
+Audio frame data callback
 
 ```objc
-- (void)enableMute:(BOOL)mute success:(void(^)(void))success failure:(void (^)(NSError * error))failure;
+- (void)mediaPlayer:(TuyaSmartCameraMessageMediaPlayer *)player  didReceivedAudioFrameInfo:(TuyaSmartAudioFrameInfo)frameInfo;
 ```
+
+**Parameters**
+
+| Parameter           | Description         |
+| ------------------- | ------------------- |
+| player              | Media player object |
+| frameInfo           | Audio frame info    |
+| frameInfo.nDuration | Audio total time    |
+| frameInfo.nProgress | Audio play progress |
+
+> Before version 3.20.0, use the interface in `TuyaSmartCloudManager` to play the attachments in the warning message. Version 3.20.0 has been deprecated, please modify it as soon as possible.
 
 ### Alarm message and playback
 

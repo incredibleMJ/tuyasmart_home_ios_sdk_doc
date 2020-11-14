@@ -1,5 +1,16 @@
 ## Low power doorbell
 
+### Determine if it is a low-power device
+
+If an IPC device configured with `149` dp point, it means that the IPC is a low-power device. In the IPC SDK, the `149` dp point is defined as the constant `TuyaSmartCameraWirelessAwakeDPName`.
+
+```objc
+// is a low-power device
+- (BOOL)isLowpowerDevice {
+		return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
+}
+```
+
 ### Sleep and wake
 
 Low power doorbell is powered by battery. In order to save power, camera will sleep when no p2p connection for a certain period of time. After sleeping, it cannot be directly connected to p2p. You need to wake up the device, and then connect to the p2p channel after waking up.
@@ -31,35 +42,23 @@ ObjC
 }
 
 // Determine if it is a low power doorbell
-- (BOOL)isDoorbell {
+- (BOOL)isLowpowerDevice {
     return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
 }
 
 - (void)start {
-    if ([self isDoorbell]) {
-        __weak typeof(self) weakSelf = self;
-				BOOL isAwaking = [[self.dpManager valueForDP:TuyaSmartCameraWirelessAwakeDPName] boolValue];
-        if (isAwaking) { 
-            if (self.isConnected) {
-                [self.videoContainer addSubview:self.camera.videoView];
-                self.camera.videoView.frame = self.videoContainer.bounds;
-                [self.camera startPreview];
-            }else {
-                [self.camera connect];
-            }
-        }else { 
-            [self.device awakeDeviceWithSuccess:nil failure:nil];
-        }
-    }
+  	if (self.isConnected) {
+				[self.videoContainer addSubview:self.camera.videoView];
+				self.camera.videoView.frame = self.videoContainer.bounds;
+        [self.camera startPreview];
+		}else if (!self.isConnecting) {
+      	if ([self isLowpowerDevice]) {
+        		[self.device awakeDeviceWithSuccess:nil failure:nil];
+    		}
+				[self.camera connect];
+      	self.isConnecting = YES;
+		}
 }
-// TuyaSmartCameraDPObserver. When the device DP is updated, this listening callback will be triggered
-- (void)cameraDPDidUpdate:(TuyaSmartCameraDPManager *)manager dps:(NSDictionary *)dpsData {
-    // If receive an update to TuyaSmartCameraWirelessAwakeDPName and the value is YES, the device has woken up
-    if ([[dpsData objectForKey:TuyaSmartCameraWirelessAwakeDPName] boolValue]) {
-        [self start];
-    }
-}
-
 ```
 
 Swift
@@ -75,33 +74,23 @@ func viewDidLoad() {
 }
 
 // Determine if it is a low power doorbell
-func isDoorbell() -> Bool {
+func isLowpowerDevice() -> Bool {
     return self.dpManager?.isSupportDP(TuyaSmartCameraWirelessAwakeDPName)
 }
 
 func start() {
-    if isDoorbell() {
-        let isAwaking = self.dpManager.valueForDP(TuyaSmartCameraWirelessAwakeDPName)
-        guard isAwaking else {
-            self.device?.awake(success: nil, failure: nil)
+  	guard self.isConnected || self.isConnecting else {
+	    	if isDoorbell() {
+          	self.device?.awake(success: nil, failure: nil)
         }
-        guard self.isConnected else {
-            self.camera.connect()
-        }
-        self.videoContainer.addSubView(self.camera.videoView)
-        self.camera.videoView.frame = self.videoContainer.bounds
-        self.camera.startPreview()        
+				self.camera.connect()
+				self.isConnecting = true
+      	return
     }
+    self.videoContainer.addSubView(self.camera.videoView)
+    self.camera.videoView.frame = self.videoContainer.bounds
+    self.camera.startPreview()
 }
-
-// TuyaSmartCameraDPObserver. When the device DP is updated, this listening callback will be triggered
-func cameraDPDidUpdate(_ manager: TuyaSmartCameraDPManager!, dps dpsData: [AnyHashable : Any]!) {
-    // If receive an update to TuyaSmartCameraWirelessAwakeDPName and the value is YES, the device has woken up
-    if let awake = dpsData[TuyaSmartCameraWirelessAwakeDPName] as? Bool, aweak == true {
-        self.start()
-    }
-} 
-    
 ```
 
 ### Doorbell call

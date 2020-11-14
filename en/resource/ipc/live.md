@@ -60,6 +60,16 @@ Start playing live video.
 
 **Declaration**
 
+Start playing live video, and specify the definition, p2p 1.0 device does not support
+
+```objc
+- (void)startPreviewWithDefinition:(TuyaSmartCameraDefinition)definition;
+```
+
+
+
+**Declaration**
+
 Stop playing live video.
 ```objc
 - (void)stopPreview;

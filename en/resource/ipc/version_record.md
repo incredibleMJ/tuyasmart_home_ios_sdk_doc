@@ -7,12 +7,32 @@
 | v1.0.0  | Create      | FuLang | 2020-03-01 |
 | v1.1.0  | Update      | FuLang | 2020-06-05 |
 | v1.1.1  | Update      | FuLang | 2020-07-31 |
+| v1.2.0  | Update      | FuLang | 2020-11-14 |
 
 
 
 ## SDK change log
 
-### TYEncryptImage-3.19.0
+### 3.20.0 (2020-11-14)
+
+| 模块                | 版本   |
+| ------------------- | ------ |
+| TuyaCameraSDK       | 3.20.1 |
+| TuyaSmartCameraBase | 4.20.0 |
+| TuyaSmartCameraM    | 4.20.0 |
+| TuyaSmartCameraKit  | 4.20.0 |
+| TuyaCameraUIKit     | 3.21.0 |
+
+**New Features**
+
+* The original alarm video playback interface is deprecated, and the `TuyaSmartCameraMessageMediaPlayer` class is added to play the attachment of the alarm message.
+* The interface for getting and setting definition is updated.
+* Added a live video playback interface with specified definition.
+* Added object outline function.
+* Added timeline UI commponent.
+* Detect message and cloud event added enctrpted image enable interface.
+
+### TYEncryptImage-3.20.0
 
 **New Features**
 

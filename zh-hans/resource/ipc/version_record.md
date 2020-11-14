@@ -7,12 +7,32 @@
 | v1.0.0 | 创建          | 傅浪   | 2020-03-01 |
 | v1.1.0 | 更新          | 傅浪   | 2020-06-05 |
 | v1.1.1 | 更新          | 傅浪   | 2020-07-31 |
+| v1.2.0 | 更新          | 傅浪   | 2020-11-14 |
 
 
 
 ## SDK 更新记录
 
-### TYEncryptImage-3.19.0
+### 3.2.0 (2020-11-14)
+
+| 模块                | 版本   |
+| ------------------- | ------ |
+| TuyaCameraSDK       | 3.20.1 |
+| TuyaSmartCameraBase | 4.20.0 |
+| TuyaSmartCameraM    | 4.20.0 |
+| TuyaSmartCameraKit  | 4.20.0 |
+| TuyaCameraUIKit     | 3.21.0 |
+
+**更新说明**
+
+* 废弃原有的告警视频播放接口，新增 `TuyaSmartCameraMessageMediaPlayer`类用于播放告警消息的附件。
+* 清晰度的获取与设置接口更新。
+* 新增指定清晰度的实时视频播放接口。
+* 新增智能画框功能。
+* 新增时间轴 UI 组件。
+* 告警消息和云存储事件新增加密图片开关。
+
+### TYEncryptImage-3.20.0
 
 **更新说明**
 
@@ -20,13 +40,13 @@
 
 ### 3.17.0 (2020-06-05)
 
-| 模块                | 版本   |      |
-| ------------------- | ------ | ---- |
-| TuyaCameraSDK       | 3.17.3 |      |
-| TuyaSmartCameraBase | 4.17.0 |      |
-| TuyaSmartCameraM    | 4.17.3 |      |
-| TuyaSmartCameraT    | 4.17.6 |      |
-| TuyaSmartCameraKit  | 4.17.1 |      |
+| 模块                | 版本   |
+| ------------------- | ------ |
+| TuyaCameraSDK       | 3.17.3 |
+| TuyaSmartCameraBase | 4.17.0 |
+| TuyaSmartCameraM    | 4.17.3 |
+| TuyaSmartCameraT    | 4.17.6 |
+| TuyaSmartCameraKit  | 4.17.1 |
 
 **更新说明**
 
