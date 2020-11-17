@@ -1,4 +1,4 @@
-# 家庭关系管理
+## 家庭关系管理
 
 用户登录成功后需要通过 `TuyaSmartHomeManager` 去获取整个家庭列表的信息，然后初始化其中的一个家庭`TuyaSmartHome`，获取家庭详情信息，就可以对家庭中的设备进行操作控制。
 
@@ -9,7 +9,7 @@
 
 
 
-## 获取家庭列表
+### 获取家庭列表
 
 获取家庭列表的接口，返回数据只是家庭的简单信息。如果要获取具体家庭的详情，需要去`TuyaSmartHome`初始化一个 home，调用接口 `getHomeDetailWithSuccess:failure:` 。
 
@@ -61,7 +61,7 @@ func getHomeList() {
 
 
 
-## 添加家庭
+### 添加家庭
 
 添加一个家庭
 
@@ -133,13 +133,13 @@ Swift:
 
 
 
-## 家庭列表信息变化回调
+### 家庭列表信息变化回调
 
 实现 `TuyaSmartHomeManagerDelegate` 代理协议后，可以在家庭列表更变的回调中进行处理。
 
 
 
-### 新增一个家庭回调
+#### 新增一个家庭回调
 
 **接口说明**
 
@@ -156,7 +156,7 @@ Swift:
 
 
 
-### 删除一个家庭回调
+#### 删除一个家庭回调
 
 **接口说明**
 
@@ -173,7 +173,7 @@ Swift:
 
 
 
-### MQTT 服务连接成功回调
+#### MQTT 服务连接成功回调
 
 程序进入后台，MQTT 长连接会断开连接，进入前台后会进行重连，所以需要在此代理这里重新获取当前家庭的详情，保证当前家庭下的数据是最新数据。
 
@@ -234,9 +234,9 @@ extension ViewController: TuyaSmartHomeManagerDelegate {
 
 ## 家庭信息管理
 
-主要功能：用来获取和修改家庭信息，解散家庭。获取，添加和删除家庭的成员。新增，解散房间，房间进行排序等。
+主要功能：单个家庭信息管理，家庭下的家庭成员管理，房间管理等。
 
-单个家庭信息管理相关的所有功能对应 `TuyaSmartHome` 类，需要使用正确的家庭 ID 进行初始化。错误的家庭 ID 会导致初始化失败，返回 `nil`。
+单个家庭信息管理相关的所有功能对应 `TuyaSmartHome` 类，需要使用正确的 homeId 进行初始化。错误的 homeId 会导致初始化失败，返回 `nil`。
 
 初始化 home 对象之后需要去获取家庭的详情 `getHomeDetailWithSuccess:failure:`，home 实例对象中的属性 homeModel、roomList、deviceList、groupList、sharedDeviceList、sharedGroupList 才有数据。
 
@@ -1111,7 +1111,52 @@ func updateRoomName() {
 }
 ```
 
+### 自定义房间图片
 
+房间可支持自定义 image，成功后可通过 `TuyaSmartRoomModel.iconUrl` 进行获取房间图片地址
+
+**接口说明**
+
+```objective-c
+- (void)updateIcon:(UIImage *)icon success:(nullable TYSuccessHandler)success failure:(nullable TYFailureError)failure;
+```
+
+**参数说明**
+
+| 参数    | 说明     |
+| ------- | -------- |
+| icon    | 房间图片 |
+| success | 成功回调 |
+| failure | 失败回调 |
+
+**示例代码**
+
+Objc:
+
+```objc
+- (void)updateIcon {
+	[self.room updateIcon:[UIImage imageNamed:@"xxx.JPG"] success:^{
+      NSLog(@"room image update success %@", room.roomModel.iconUrl);
+	} failure:^(NSError *error) {
+      NSLog(@"room image update failure: %@", error);
+	}];
+}
+```
+
+Swift:
+
+```swift
+func updateIcon() {
+
+    room?.updateIcon(UIImage(named: "xxx.jpg") success: {
+        print("room image update success")
+    }, failure: { (error) in
+        if let e = error {
+            print("room image update failure: \(e)")
+        }
+    })
+}
+```
 
 ### 添加设备到房间
 

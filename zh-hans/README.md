@@ -20,4 +20,4 @@ SDK 主要包括以下功能：
 
 
 
-<img src="./resource/images/Integrated.jpg" alt="架构图" style="zoom:60%;" />
+<img src="./resource/images/Integrated.png" alt="架构图" style="zoom:60%;" />
