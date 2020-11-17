@@ -1395,7 +1395,7 @@ Sush as city name, state of weather(clear, cloudy, rainy, and so on),weather ico
 ```
 
 
-If cannot get methods,please code:
+If cannot get methods, or before 3.20.0, please code:
 ```
 #import <TuyaSmartDeviceKit/TuyaSmartHome+Weather.h>
 ```
