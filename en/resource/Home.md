@@ -1395,6 +1395,11 @@ Sush as city name, state of weather(clear, cloudy, rainy, and so on),weather ico
 ```
 
 
+If cannot get methods,please code:
+```
+#import <TuyaSmartDeviceKit/TuyaSmartHome+Weather.h>
+```
+
 **Parameters**
 
 | Parameters      | Description                         |
