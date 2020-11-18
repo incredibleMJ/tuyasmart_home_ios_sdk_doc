@@ -37,7 +37,7 @@ CocoaPods的使用请参考：[CocoaPods Guides](https://guides.cocoapods.org/)
 
 1. 打开项目设置，Target => General，修改```Bundle Identifier```为涂鸦开发者平台上注册的 App 对应的 iOS 包名。
 
-2. 将上面[准备工作](https://tuyainc.github.io/tuyasmart_home_ios_sdk_doc/zh-hans/resource/Preparation.html)中下载的安全图片导入到工程根目录，重命名为```t_s.bmp```，并加入「项目设置 => Target => Build Phases => Copy Bundle Resources」中。
+2. 将[准备工作](https://tuyainc.github.io/tuyasmart_home_ios_sdk_doc/zh-hans/resource/Preparation.html)中下载的安全图片导入到工程根目录，重命名为```t_s.bmp```，并加入「项目设置 => Target => Build Phases => Copy Bundle Resources」中。
 
 3. 在项目的```PrefixHeader.pch```文件添加以下内容（Swift 项目可以添加在```xxx_Bridging-Header.h```桥接文件中）：
 
@@ -86,3 +86,18 @@ Swift
 
 ```
 
+### Demo App
+
+[IPC SDK Demo 链接](https://github.com/TuyaInc/tuyasmart_camera_ios_sdk)
+
+参考[Home SDK Demo App](https://tuyainc.github.io/tuyasmart_home_ios_sdk_doc/zh-hans/resource/Demo.html)的简介，将 `BundleId`、 `AppKey`、`AppSecret`、安全图片配置正确。
+
+IPC SDK Demo App 在 Home SDK Demo App 的功能基础上，增加了 IPC 设备的控制面板模块。
+
+* 直播页面：IPC 设备的 p2p 连接流程，实时视频播放，视频录制、截图、对讲等功能。
+* 回放页面：设备存储卡中视频片段的获取与播放，时间轴组件的使用。
+* 云存储页面：云存储服务的开通，状态判断，云存储视频和云存储事件的获取与播放。
+* 消息页面：告警事件的获取与展示。
+* 设置页面：IPC 设备标准 dp 功能点的使用。
+
+<img src="./images/preview.PNG" alt="live" style="zoom:15%;" /><img src="./images/playback.PNG" alt="playback" style="zoom:15%;" /><img src="./images/cloudStorage.PNG" alt="cloudstorage" style="zoom:15%;" /><img src="./images/message.PNG" alt="message" style="zoom:15%;" /><img src="./images/setting.PNG" alt="setting" style="zoom:15%;" />

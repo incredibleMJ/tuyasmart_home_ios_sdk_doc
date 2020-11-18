@@ -41,6 +41,14 @@ When `TuyaSmartCloudManager` initializes, the device id needs to be passed in. C
 | --------- | ----------- |
 | devId     | Deivice id  |
 
+**Declaration**
+
+Enable encrypted image, set it `YES`, the picture in cloud event modes will be encrypted, need to use `TYEncryptImage` component display the image.
+
+```objc
+@property (nonatomic, assign) BOOL enableEncryptedImage;
+```
+
 
 
 The `TuyaSmartCloudManagerDelegate `has only one method, will return each frame of video YUV data and frame information. If you want to render video frame by yourself, set `autoRender` of `TuyaSmartCloudManager` to `NO`( default is `YES`), and then render the video in delegate method.

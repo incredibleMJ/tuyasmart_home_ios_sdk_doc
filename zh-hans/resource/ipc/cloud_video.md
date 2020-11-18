@@ -41,6 +41,16 @@
 | ----- | ------- |
 | devId | 设备 id |
 
+**接口说明**
+
+开启图片加密，设置为`YES`，云存储事件中携带的图片将加密，需要使用 `TYEncryptImage`组件显示图片。
+
+```objc
+@property (nonatomic, assign) BOOL enableEncryptedImage;
+```
+
+
+
 云存储代理接口为`TuyaSmartCloudManagerDelegate`，只有一个代理方法，会返回每一帧视频的 YUV 数据和帧信息，如果你想要自己渲染视频，可以将 `TuyaSmartCloudManager`的`autoRender`属性设置为`NO`（默认为`YES`），并在代理方法中获取视频帧的YUV数据加以渲染。
 
 **接口说明**

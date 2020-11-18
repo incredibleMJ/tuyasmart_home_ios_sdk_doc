@@ -1,8 +1,19 @@
 ## 低功耗门铃
 
+### 判断是否是低功耗门铃
+
+一个 IPC 设备，如果配置了 `149`  dp 点，就表示这个 IPC 设备是一个低功耗设备。在 IPC SDK 中，`149`  dp 点被定义为常量`TuyaSmartCameraWirelessAwakeDPName`。
+
+```objc
+// 是否是低功耗设备
+- (BOOL)isLowpowerDevice {
+		return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
+}
+```
+
 ### 休眠唤醒
 
-低功耗门铃由电池供电，为了节省电量，在一定时间内没有 p2p 连接会休眠，休眠后无法直接连接 p2p，需要先唤醒设备，再连接 p2p 通道。
+低功耗门铃由电池供电，为了节省电量，在一定时间内没有 p2p 连接会休眠，休眠后无法直接连接 p2p，需要先唤醒设备，再连接 p2p 通道。使用`TuyaSmartDevice`类提供的接口来唤醒设备。
 
 **接口说明**
 
@@ -29,35 +40,23 @@ ObjC
   	[self start];
 }
 
-// 判断是否是低功耗门铃
-- (BOOL)isDoorbell {
+// 是否是低功耗设备
+- (BOOL)isLowpowerDevice {
     return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
 }
 
 - (void)start {
-    if ([self isDoorbell]) {
-        __weak typeof(self) weakSelf = self;
-        // 获取设备的状态
-				BOOL isAwaking = [[self.dpManager valueForDP:TuyaSmartCameraWirelessAwakeDPName] boolValue];
-        if (isAwaking) { // 唤醒状态下，直接连接p2p 或者 开始预览
-            if (self.isConnected) {
-                [self.videoContainer addSubview:self.camera.videoView];
-                self.camera.videoView.frame = self.videoContainer.bounds;
-                [self.camera startPreview];
-            }else {
-                [self.camera connect];
-            }
-        }else { // 休眠状态下，发送唤醒命令
-            [self.device awakeDeviceWithSuccess:nil failure:nil];
-        }
-    }
-}
-// TuyaSmartCameraDPObserver 当设备 DP 有更新的时候，会触发这个监听回调
-- (void)cameraDPDidUpdate:(TuyaSmartCameraDPManager *)manager dps:(NSDictionary *)dpsData {
-    // 如果收到 TuyaSmartCameraWirelessAwakeDPName 的更新，并且值为 YES，表示设备已唤醒
-    if ([[dpsData objectForKey:TuyaSmartCameraWirelessAwakeDPName] boolValue]) {
-        [self start];
-    }
+  	if (self.isConnected) {
+				[self.videoContainer addSubview:self.camera.videoView];
+				self.camera.videoView.frame = self.videoContainer.bounds;
+        [self.camera startPreview];
+		}else if (!self.isConnecting) {
+      	if ([self isLowpowerDevice]) {
+        		[self.device awakeDeviceWithSuccess:nil failure:nil];
+    		}
+				[self.camera connect];
+      	self.isConnecting = YES;
+		}
 }
 
 ```
@@ -76,36 +75,23 @@ func viewDidLoad() {
 }
 
 // 判断是否是低功耗门铃
-func isDoorbell() -> Bool {
+func isLowpowerDevice() -> Bool {  
     return self.dpManager?.isSupportDP(TuyaSmartCameraWirelessAwakeDPName)
 }
 
 func start() {
-    if isDoorbell() {
-      	// 获取设备的状态
-        let isAwaking = self.dpManager.valueForDP(TuyaSmartCameraWirelessAwakeDPName)
-        guard isAwaking else {
-          	// 唤醒设备
-            self.device?.awake(success: nil, failure: nil)
+  	guard self.isConnected || self.isConnecting else {
+	    	if isDoorbell() {
+          	self.device?.awake(success: nil, failure: nil)
         }
-        guard self.isConnected else {
-          	// 连接 p2p 通道
-            self.camera.connect()
-        }
-        self.videoContainer.addSubView(self.camera.videoView)
-        self.camera.videoView.frame = self.videoContainer.bounds
-      	// 开始预览
-        self.camera.startPreview()        
+				self.camera.connect()
+				self.isConnecting = true
+      	return
     }
+    self.videoContainer.addSubView(self.camera.videoView)
+    self.camera.videoView.frame = self.videoContainer.bounds
+    self.camera.startPreview()
 }
-
-// TuyaSmartCameraDPObserver 当设备 DP 有更新的时候，会触发这个监听回调
-func cameraDPDidUpdate(_ manager: TuyaSmartCameraDPManager!, dps dpsData: [AnyHashable : Any]!) {
-     // 如果收到 TuyaSmartCameraWirelessAwakeDPName 的更新，并且值为 YES，表示设备已唤醒
-    if let awake = dpsData[TuyaSmartCameraWirelessAwakeDPName] as? Bool, aweak == true {
-        self.start()
-    }
-} 
     
 ```
 

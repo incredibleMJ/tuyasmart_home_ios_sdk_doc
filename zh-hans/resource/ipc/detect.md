@@ -189,40 +189,72 @@
 
 根据消息类型不同，可能会有不同的附件。通过 `attachPic` 属性获取图片附件的地址，`attachVideos` 属性获取视频附件的地址，通常情况下，这个属性只有一个元素。
 
-> 报警消息中的图片附件，数据是加密过的，需要使用加密图片组件`TYEncryptImage`展示，详情参考[加密图片](./encryptImage.md)章节。
+### 加密图片
 
-## 视频消息
-
-视频消息中的视频附件，是加密后的视频，需要通过 `TuyaSmartCloudManager` 提供的接口播放。 `attachVideos` 中的元素格式为："视频地址@密钥"，播放视频时，需要同时传入视频地址和密钥。
+为了保证数据的隐私安全性，可以选择使用加密图片的消息。
 
 **接口说明**
 
-播放报警消息中的视频
+开启图片加密，默认为关闭。打开后，消息中携带的图片会加密，需要使用 `TYEncryptImage` 组件显示图片，详情参考[加密图片](./encryptImage.md)章节。
 
 ```objc
-- (int)playVideoMessageWithUrl:(NSString *)url 
-  									 startTime:(int)nStartTime 
-                    encryptKey:(NSString *)encryptKey 
-                    onResponse:(void (^)(int errCode))callback 
-                      onFinish:(void (^)(int errCode))finihedCallBack;
+@property (nonatomic, assign) BOOL enableEncryptedImage;
+```
+
+## 视频消息
+
+视频消息中的视频附件，是加密后的视频，需要通过 `TuyaSmartCameraKit/TuyaSmartCameraMessageMediaPlayer` 提供的接口播放。 
+
+**接口说明**
+
+获取视频帧渲染视图
+
+```objc
+- (UIView<TuyaSmartVideoViewType> *)videoView;
+```
+
+**接口说明**
+
+播放报警消息中的附件
+
+```objc
+- (void)playMessage:(TuyaSmartCameraMessageModel *)messageModel attachmentType:(TuyaCameraMessageAttachmentType)attachmentType success:(void(^)(void))success failure:(void(^)(int errCode))failure finished:(void(^)(int errCode))onFinish;
 ```
 
 **参数说明**
 
-| 参数             | 说明                                                     |
-| ---------------- | -------------------------------------------------------- |
-| url              | 视频地址                                                 |
-| nStartTime       | 开始播放的时间点，从 0 开始，单位为`秒`                  |
-| encryptKey       | 视频加密的密钥                                           |
-| callback         | 视频播放结果回调，errCode 标示错误码，0 表示播放成功     |
-| finishedCallBack | 视频播放结束回调，errCode 标示错误码，0 表示正常播放结束 |
+| 参数           | 说明                                                     |
+| -------------- | -------------------------------------------------------- |
+| messageModel   | 告警消息数据模型                                         |
+| attachmentType | 需要播放的附件类型，告警消息中可能包含视频消息和音频消息 |
+| success        | 播放成功回调                                             |
+| failure        | 播放失败回调                                             |
+| onFinish       | 视频播放结束回调，errCode 标示错误码，0 表示正常播放结束 |
+
+**接口说明**
+
+播放报警消息的附件
+
+```objc
+- (void)playMessageAttachment:(NSString *)attachmentPath type:(TuyaCameraMessageAttachmentType)attachmentType success:(void(^)(void))success failure:(void(^)(int errCode))failure finished:(void(^)(int errCode))onFinish;
+```
+
+**参数说明**
+
+| 参数           | 说明                                                         |      |
+| -------------- | ------------------------------------------------------------ | ---- |
+| attachmentPath | 附件的 URL                                                   |      |
+| attachmentType | 附件的类型，音频附件还是视频附件，图片附件请使用`TYEncryptImage`组件展示 |      |
+| success        | 播放成功回调                                                 |      |
+| failure        | 播放失败回调                                                 |      |
+| onFinish       | 视频播放结束回调，errCode 标示错误码，0 表示正常播放结束     |      |
 
 **接口说明**
 
 暂停播放
 
 ```objc
-- (int)pausePlayVideoMessage;
+- (int)pausePlay:(TuyaCameraMessageAttachmentType)attachmentType;
 ```
 
 **接口说明**
@@ -230,7 +262,7 @@
 恢复播放
 
 ```objc
-- (int)resumePlayVideoMessage;
+- (int)resumePlay:(TuyaCameraMessageAttachmentType)attachmentType;
 ```
 
 **接口说明**
@@ -238,8 +270,24 @@
 停止播放
 
 ```objc
-- (int)stopPlayVideoMessage;
+- (void)stopPlay:(TuyaCameraMessageAttachmentType)attachmentType;
 ```
+
+**接口说明**
+
+声音控制开关
+
+```objc
+- (void)enableMute:(BOOL)mute success:(void(^)(void))success failure:(void (^)(NSError * error))failure;
+```
+
+**参数说明**
+
+| 参数    | 说明     |
+| ------- | -------- |
+| mute    | 是否静音 |
+| success | 成功回调 |
+| failure | 失败回调 |
 
 
 
@@ -251,24 +299,46 @@
 
 
 
-视频消息的播放同云存储视频的播放类似，在接收到视频帧时，会有视频帧数据代理回调。
+**TuyaSmartCameraMessageMediaPlayerDelegate**
+
+消息播放器代理协议
+
+**接口说明**
+
+视频帧数据回调
 
 ```objc
-- (void)cloudManager:(TuyaSmartCloudManager *)cloudManager 
-  	didReceivedFrame:(CMSampleBufferRef)frameBuffer 
-      videoFrameInfo:(TuyaSmartVideoFrameInfo)frameInfo;
+- (void)mediaPlayer:(TuyaSmartCameraMessageMediaPlayer *)player didReceivedFrame:(CMSampleBufferRef)frameBuffer videoFrameInfo:(TuyaSmartVideoFrameInfo)frameInfo;
 ```
 
-结构体`TuyaSmartVideoFrameInfo`中的下面两个属性描述视频的总时长和进度，单位是`毫秒`。
+**参数说明**
 
-* **nDuration** : 视频总时长
-* **nProgress** : 当前视频帧的进度
+| 参数                | 说明             |
+| ------------------- | ---------------- |
+| player              | 播放器对象       |
+| frameBuffer         | 视频帧 YUV 数据  |
+| frameInfo           | 视频帧头信息     |
+| frameInfo.nDuration | 视频总时长       |
+| frameInfo.nProgress | 当前视频帧的进度 |
 
-视频声音开关同云存储一样，使用下面的接口：
+**接口说明**
+
+音频帧数据回调
 
 ```objc
-- (void)enableMute:(BOOL)mute success:(void(^)(void))success failure:(void (^)(NSError * error))failure;
+- (void)mediaPlayer:(TuyaSmartCameraMessageMediaPlayer *)player  didReceivedAudioFrameInfo:(TuyaSmartAudioFrameInfo)frameInfo;
 ```
+
+**参数说明**
+
+| 参数                | 说明             |
+| ------------------- | ---------------- |
+| player              | 播放器           |
+| frameInfo           | 音频帧头信息     |
+| frameInfo.nDuration | 音频总时长       |
+| frameInfo.nProgress | 当前音频帧的进度 |
+
+> 3.20.0 版本之前，使用 `TuyaSmartCloudManager`中的接口来播放告警消息中的附件，3.20.0 版本开始已经废弃，请尽快修改。
 
 ### 报警消息与存储卡回放
 
@@ -279,8 +349,6 @@
 但是存在报警消息发生的时间点有视频录像的情况，IPC SDK 并不提供这种关联查找的接口，开发者可以通过报警消息的触发时间，在当天的存储卡录像视频片段中查找是否有对应的视频录像来建立这种关联。
 
 **示例代码**
-
-ObjC
 
 ```objc
 - (void)enableDetect {
@@ -329,7 +397,6 @@ ObjC
         // 网络错误
     }];
 }
-
 ```
 
 Swift

@@ -105,7 +105,7 @@ Create camera configuration object.
 | -------- | ---------------------------------------- ---------------- |
 |uid | User `uid`,  `[[TuyaSmartUser sharedInstance] .uid` |
 |localKey | Device key, `TuyaSmartDeviceModel.localKey` |
-|data | Configuration information obtained through the `tuya.m.ipc.config.get` api |
+|data | Configuration information obtained through the `tuya.m.rtc.session.init` api |
 
 **Return**
 
