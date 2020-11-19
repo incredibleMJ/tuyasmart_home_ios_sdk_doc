@@ -8,4 +8,5 @@
 
 垂直品类 SDK 是基于 Home SDK，架构设计如下图所示：
 
-<img src="./images/Integrated.jpg" alt="架构图" style="zoom:60%;" />
+<img src="./images/Integrated.png" alt="架构图" style="zoom:60%;" />
+
