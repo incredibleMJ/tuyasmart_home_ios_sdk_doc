@@ -162,6 +162,7 @@
       * [消息列表](./resource/ipc/detect.md#消息列表)
       * [视频消息](./resource/ipc/detect.md#视频消息)
     * [加密图片](./resource/ipc/encryptImage.md)
+    * [时间轴](./resource/ipc/timeline.md)
     * [错误码](./resource/ipc/errors.md)
     * [需要的权限](./resource/ipc/required_permission.md)
     * [调试日志文件](./resource/ipc/log_file.md)
