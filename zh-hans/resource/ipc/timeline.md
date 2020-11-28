@@ -6,6 +6,22 @@
 
 
 
+## SDK 集成
+
+在`Podfile`文件中添加以下内容：
+
+```ruby
+platform :ios, '9.0'
+
+target 'your_target_name' do
+
+  pod "TuyaCameraUIKit"
+
+end
+```
+
+在项目根目录下执行`pod update`命令。
+
 **类和协议**
 
 | 类（协议）名             | 描述                         |

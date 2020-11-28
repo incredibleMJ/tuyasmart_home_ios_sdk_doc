@@ -29,7 +29,7 @@ target 'your_target_name' do
 end
 ```
 
-如果您需要支持 p2p 1.0 的设备，需要增加 `pod "TuyaSmartCameraT"`, 然后在项目根目录下执行```pod update```命令。
+如果您需要支持 p2p 1.0 的设备，需要增加 `pod "TuyaSmartCameraT"`, 然后在项目根目录下执行`pod update`命令。
 
 CocoaPods的使用请参考：[CocoaPods Guides](https://guides.cocoapods.org/)
 
