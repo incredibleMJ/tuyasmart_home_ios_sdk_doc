@@ -1,10 +1,28 @@
 # Timeline View
 
+
+
 When the timeline component uses video playback or cloud storage video playback, it linearly displays the video recording time points that can be played. You can slide the timeline to accurately locate the time point and segment to start playing. UI effects are as follows：
 
 ![timeline](./images/timeline.gif)
 
 
+
+## Integrated SDK
+
+Add the following content in the `Podfile` file.
+
+```ruby
+platform :ios, '9.0'
+
+target 'your_target_name' do
+
+  pod "TuyaCameraUIKit"
+
+end
+```
+
+Then run the `pod update` command in the root directory of project. 
 
 **Class and Protocol**
 
