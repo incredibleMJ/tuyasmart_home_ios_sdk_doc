@@ -3,6 +3,7 @@
 1. After calling startPreview, there is no video picture and no error feedback.
    * Check if the camera object was created successfully. If the obtained camera object is nil, check if p2pType is "1". When p2pType is "1", `TuyaSmartCameraT` needs to be imported. Since this module is no longer maintained, it is recommended to contact the manufacturer to upgrade the camera firmware.
    * Check if the p2p channel is connected successfully. `startPreivew` must be called after receiving the` cameraDidConnected: `callback.
+   * Check the size of `videoView.frame`, please do not set `videoView.frame` too large, otherwise it will cause the rendering buffer frame of OpenGL ES to fail and render it impossible. The video image can be enlarged by the `videoView.tuya_setScaled` method.
 2. Crash after calling `-(void) destory` method.
    * In the old version, there was a bug. When p2pType is 1, calling destory method would indeed crash. This has been fixed in versions after 3.1.1.
    * Before calling the `destory` method, stop the preview or playback operation and call` disConnect` to disconnect the p2p channel.
@@ -15,3 +16,8 @@
    * Please check whether the parameters are correct. `PlayTime` must be greater than or equal to` startTime` and less than `endTime`.
 6. Already integrated other video solutions, after importing Tuya Smart Camera iOS SDK, compilation error or crash at runtime.
    * This is due to the conflict of FFmpeg library version. You can package the integrated library into a dynamic library to resolve the conflict.
+
+7. There are black borders on both sides of the video image (up and down or left and right)
+
+* After get the video rendering view through `camera.videoView`, developers can set the size of `videoView` by themselves. The size of the video image is determined by the camera device. When the aspect ratio of the video image is inconsistent with the aspect ratio of `videoView`, in order to avoid image stretching and distortion, the aspect ratio of the video image will be maintained, and there will be left on both sides of the image black border. If you need to stretch and cover the entire `videoView`, you can set `videoView.scaleToFill` to `YES`.
+* If you don’t want the video image to be stretched or deformed, after receiving the video stream successfully, you can get the width and height of the current video image through the two properties of `camera.getCurViewWidth` and `camera.getCurViewHeight`, thereby calculating the aspect ratiot of the video image, and then calculate the size of `videoView` according to the aspect ratio of the video image, which can avoid the situation that the image has black borders.
