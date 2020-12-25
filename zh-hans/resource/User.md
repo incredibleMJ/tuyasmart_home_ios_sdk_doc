@@ -1202,6 +1202,104 @@ TuyaSmartUser.sharedInstance().usernameBinding(withCountryCode: countryCode, use
 
 ```
 
+## 账号绑定
+
+### 邮箱绑定
+
+邮箱绑定流程分为以下两步：获取绑定邮箱验证码 - 绑定邮箱到当前登录用户账号
+
+**接口说明**
+
+发送验证码，用于邮箱绑定
+
+```
+- (void)sendBindingVerificationCodeWithEmail:(NSString *)email
+                                 countryCode:(NSString *)countryCode
+                                     success:(nullable TYSuccessHandler)success
+                                     failure:(nullable TYFailureError)failure;
+```
+
+**参数说明**
+
+| 参数        | 说明                                 |
+| :---------- | :----------------------------------- |
+| email       | 邮箱                                 |
+| countryCode | 国家码，例如：86                     |
+| success     | 接口发送成功回调                     |
+| failure     | 接口发送失败回调，error 表示失败原因 |
+
+**示例代码**
+
+Objc:
+
+```objective-c
+[[TuyaSmartUser sharedInstance] sendBindingVerificationCodeWithEmail:@"your_email" countryCode:@"your_country_code" success:^{
+      NSLog(@"sendVerifyCode success");
+} failure:^(NSError *error) {
+    NSLog(@"sendVerifyCode failure: %@", error);
+}];
+```
+
+Swift:
+
+```swift
+TuyaSmartUser.sharedInstance()?.sendBindingVerificationCode(withEmail: "your_email", countryCode: "your_country_code", success: {
+    print("sendVerifyCode success")
+}, failure: { (error) in
+    if let e = error {
+        print("sendVerifyCode failure: \(e)")
+    }
+})
+```
+
+**接口说明**
+
+绑定邮箱到当前登录账号
+
+```
+- (void)bindEmail:(NSString *)email
+  withCountryCode:(NSString *)countryCode
+             code:(NSString *)code
+              sId:(NSString *)sId
+          success:(nullable TYSuccessHandler)success
+          failure:(nullable TYFailureError)failure;
+```
+
+**参数说明**
+
+| 参数        | 说明                                 |
+| :---------- | :----------------------------------- |
+| email       | 邮箱                                 |
+| countryCode | 国家码，例如：86                     |
+| code        | 经过验证码发送接口，收到的验证码     |
+| sId         | 用户登录后的session ID               |
+| success     | 接口发送成功回调                     |
+| failure     | 接口发送失败回调，error 表示失败原因 |
+
+**示例代码**
+
+Objc:
+
+```objective-c
+[[TuyaSmartUser sharedInstance] bindEmail:@"your_email" withCountryCode:@"your_country_code" code:@"verify_code" sId:@"session_id" success:^{
+    NSLog(@"register success");
+} failure:^(NSError *error) {
+    NSLog(@"register failure: %@", error);
+}];
+```
+
+Swift:
+
+```swift
+TuyaSmartUser.sharedInstance()?.bind(email: "your_email", withCountryCode: "your_country_code", code: "verify_code", sId: "session_id", success: {
+    print("register success")
+}, failure: { (error) in
+    if let e = error {
+        print("register failure: \(e)")
+    }
+})
+```
+
 ## 修改用户信息
 
 ### 修改用户头像
