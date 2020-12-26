@@ -1252,6 +1252,104 @@ TuyaSmartUser.sharedInstance().usernameBinding(withCountryCode: countryCode, use
 
 ```
 
+## Account Binding
+
+### User Email Binding
+
+The email binding process is divided into the following two steps: get email verification code - Bind the email to the currently logged in user account.
+
+**Declaration**
+
+send verification code, used for email binding.
+
+```objective-c
+- (void)sendBindingVerificationCodeWithEmail:(NSString *)email
+                                 countryCode:(NSString *)countryCode
+                                     success:(nullable TYSuccessHandler)success
+                                     failure:(nullable TYFailureError)failure;
+```
+
+**Parameters**
+
+| Param       | Description                   |
+| :---------- | :---------------------------- |
+| email       | Email                         |
+| countryCode | Country code, for example: 86 |
+| success     | Success Callback              |
+| failure     | Failure Callback              |
+
+**Example**
+
+Objc:
+
+```objective-c
+[[TuyaSmartUser sharedInstance] sendBindingVerificationCodeWithEmail:@"your_email" countryCode:@"your_country_code" success:^{
+      NSLog(@"sendVerifyCode success");
+} failure:^(NSError *error) {
+    NSLog(@"sendVerifyCode failure: %@", error);
+}];
+```
+
+Swift:
+
+```swift
+TuyaSmartUser.sharedInstance()?.sendBindingVerificationCode(withEmail: "your_email", countryCode: "your_country_code", success: {
+    print("sendVerifyCode success")
+}, failure: { (error) in
+    if let e = error {
+        print("sendVerifyCode failure: \(e)")
+    }
+})
+```
+
+**Declaration**
+
+Bind email to current login account.
+
+```objective-c
+- (void)bindEmail:(NSString *)email
+  withCountryCode:(NSString *)countryCode
+             code:(NSString *)code
+              sId:(NSString *)sId
+          success:(nullable TYSuccessHandler)success
+          failure:(nullable TYFailureError)failure;
+```
+
+**Parameters**
+
+| Param       | Description                                                  |
+| :---------- | :----------------------------------------------------------- |
+| email       | Email                                                        |
+| countryCode | Country code, for example: 86                                |
+| code        | After the verification code sending, the verification code received |
+| sId         | Session ID of the user after login                           |
+| success     | Success Callback                                             |
+| failure     | Failure Callback                                             |
+
+**Example**
+
+Objc:
+
+```objective-c
+[[TuyaSmartUser sharedInstance] bindEmail:@"your_email" withCountryCode:@"your_country_code" code:@"verify_code" sId:@"session_id" success:^{
+    NSLog(@"register success");
+} failure:^(NSError *error) {
+    NSLog(@"register failure: %@", error);
+}];
+```
+
+Swift:
+
+```swift
+TuyaSmartUser.sharedInstance()?.bind(email: "your_email", withCountryCode: "your_country_code", code: "verify_code", sId: "session_id", success: {
+    print("register success")
+}, failure: { (error) in
+    if let e = error {
+        print("register failure: \(e)")
+    }
+})
+```
+
 ## Modify User Info
 
 ### Modify User Avatar
