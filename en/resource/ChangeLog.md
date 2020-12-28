@@ -1,90 +1,237 @@
-# Change Log
+# Tuya Smart iOS Home SDK Release Notes
 
-## 3.20.0(2020-10-30)
+## V3.22.0
 
-- New Feature
-  - New guest user login mode
-  - Support new lightning active device
-  - Bug fixed
+### Release date
 
-## 3.19.0(2020-09-21)
+2020.12.25
 
-- New Feature
-  - New timing interface function
-  - The room supports changing custom pictures
-  - Added device dps time for device attributes, which can record the time corresponding to the nearest change of dp
-  - Bug fixed
+### New features
 
-## 3.17.6(2020-07-09)
+- Added the feature to link an email address.
+- Added the feature to activate HomeKit devices.
+- Supported the infrared radio frequency devices.
+- Added entries to the big data channel.
+- Added the category group of standard electrical products.
 
-- New Feature
-  - Smart scene of timing conditions related to sunrise and sunset
-  - Bug fixed
+### Fixed issues
 
-## 3.17.0(2020-04-27)
+- Fixed an issue of slow subscription when many devices are associated.
+- Fixed an issue where a shared Bluetooth device might be reset during removal.
 
-- New Feature
-  - Smart scene support for geofence condition trigger
-  - Firmware upgrade status prompt
-  - QR code login
-  - Mesh support fast active
-  - Support Wi-Fi sub-device group
-  - Bug fixed
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
 
-## 3.15.0(2020-04-11)
+## v3.20.0
 
-- New Feature
-  - Group support set custom icon
-  - Bug fixed
+### Release Date
 
-## 3.14.0(2019-12-21)
+2020.10.30
 
-- New Feature
-  - MQTTClient Use `0.15.2`
-  - HTTP Request and Response Data Encryption
-  - Manager More Family Member Role
-  - Add Scene Cache
-  - Add Scene Conditions and Actions Class
-  - Support for Login with Apple
-  - Bug Fixed
+### Highlights
 
-## 3.13.0(2019-12-06)
+- New guest user login mode
+- Support new lightning active device
+- Bugs fixed
 
-- New Feature
-  - Support DP Code Control
-  - Support More Family Member Role
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
 
-## 3.12.0(2019-09-21)
+## v3.19.0
 
-- Functional Change
+### Release Date
 
-  - Device Support Update Head Image
-  - Support Wi-Fi and Bluetooth Dual-mode Devices
+2020.09.21
 
-  - Support Sub Device OTA
+### Highlights
 
-  - Firmware Upgrade to Add Callbacks in Upgrading
-  - AP Distribution Network Optimization
-  - Timing Support Annotation and Push Function
-  - Support SigMesh Devices
-  - Bug Fixed
+- New timing interface function
+- The room supports changing custom pictures
+- Added device dps time for device attributes, which can record the time corresponding to the nearest change of dp
+- Bugs fixed
 
-## 2.12.46(2019-07-22)
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
 
-- Bug Fixed, Push Notification Was Classified
+## v3.17.6
 
-## 2.10.97(2019-06-20)
+### Release Date
 
-- Support  CocoaPods (>= 1.6.0)
+2020.07.09
 
-## 2.10.96(2019-05-11)
+### Highlights
 
-- Bug Fixed, Add Device Network Configuration Without Password, Add Push Notification to Open or Close, Add Development Environment Push Support
+- Smart scene of timing conditions related to sunrise and sunset
+- Bugs fixed
 
-## 2.8.44(2019-03-28)
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v3.17.0
+
+### Release Date
+
+2020.04.27
+
+### Highlights
+
+- Smart scene support for geofence condition trigger
+- Firmware upgrade status prompt
+- QR code login
+- Mesh support fast active
+- Support Wi-Fi sub-device group
+- Bugs fixed
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v3.15.0
+
+### Release Date
+
+2020.04.11
+
+### Highlights
+
+- Group support set custom icon
+- Bugs fixed
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v3.14.0
+
+### Release Date
+
+2019.12.21
+
+### Highlights
+
+- MQTTClient Use 0.15.2
+- HTTP Request and Response Data Encryption
+- Manager More Family Member Role
+- Add Scene Cache
+- Add Scene Conditions and Actions Class
+- Support for Login with Apple
+- Bugs Fixed
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v3.13.0
+
+### Release Date
+
+2019.12.06
+
+### Highlights
+
+- Support DP Code Control
+- Support More Family Member Role
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v3.12.0
+
+### Release Date
+
+2019.09.21
+
+### Highlights
+
+- Device Support Update Head Image
+- Support Wi-Fi and Bluetooth Dual-mode Devices
+- Support Sub Device OTA
+- Firmware Upgrade to Add Callbacks in Upgrading
+- AP Distribution Network Optimization
+- Timing Support Annotation and Push Function
+- Support SigMesh Devices
+- Bugs Fixed
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v2.12.46
+
+### Release Date
+
+2019.07.22
+
+### Highlights
+
+- Push Notification Was Classified
+- Bugs Fixed
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v2.10.97
+
+### Release Date
+
+2019.06.20
+
+### Highlights
+
+- Support Cocoapods (>=1.6.0)
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v2.10.96
+
+### Release Date
+
+2019.05.11
+
+### Highlights
+
+- Added Device Network Configuration Without Password
+- Added Push Notification to Open or Close
+- Add Development Environment Push Support
+- Bugs Fixed
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
+
+## v2.8.44
+
+### Release Date
+
+2019.03.28
+
+### Highlights
 
 - Fixed an Online Problem with Wi-Fi Subdevices
+- Bugs Fixed
 
-## 2.8.43(2019-03-15)
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
 
-- New Encryption:  Appkey, AppSecret, iOS Security Images, BundleId for Application on Tuya Developer Platform
+## v2.8.43
+
+### Release Date
+
+2019.03.15
+
+### Highlights
+
+- New Encryption: Appkey, AppSecret, iOS Security Images, BundleId for Application on Tuya Developer Platform
+
+<div>
+        &copy; 2014 - 2021 Tuya Inc. All Rights Reserved.
+</div>
