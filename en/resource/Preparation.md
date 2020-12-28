@@ -10,7 +10,7 @@ Go to the [Tuya Smart Development Platform](https://iot.tuya.com) to register a 
 
 **Note**: If you do not have a Tuya account, register first.
 
-2.Go into the "**App Service**" panel, and select **Development** under the "**App**" side menu, then click **Create**.
+2.Go to the "**App**" panel, and select **Development** under the "**App SDK**" side menu, then click **Create**.
 
 ![Obtain App SDK](./images/getSDK_en.png)
 
@@ -19,7 +19,7 @@ Go to the [Tuya Smart Development Platform](https://iot.tuya.com) to register a 
 - **App name**: Enter the App name.
 - **iOS Bundle ID**: Enter the iOS app bundle ID. The recommended format is com.xxxxx.xxxxx.
 - **Android Package Name**: Enter the Android app package name. It is not necessary to be consistent with iOS bundle ID.
-- **Channel ID**: It is not required. If it is not entered, the system will automatically generate one channel ID according to the package name.
+- **URL Scheme**: It is not required. If it is not entered, the system will automatically generate one URL Scheme according to the package name.
 
 ![Obtain App SDK](./images/app_info_en.png)
 
