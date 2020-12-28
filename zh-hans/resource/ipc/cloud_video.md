@@ -143,6 +143,52 @@
 | success  | 成功回调，返回当天所有视频片段时间数据模型的数组 |
 | failure  | 失败回调，error 标示错误信息                     |
 
+**接口说明**
+
+下载云存储视频
+
+```objc
+- (void)downloadCloudVideoWithRange:(NSRange)timeRange
+                           filePath:(NSString *)videoPath
+                            success:(DownloadSuccess)success
+                           progress:(DownloadProgress)progress
+                            failure:(DownloadFailure)failure;
+```
+
+**参数说明**
+
+| 参数      | 说明                                                         |
+| --------- | ------------------------------------------------------------ |
+| timeRange | 下载需要下载的视频片段的范围，`location` 使用 UTC 时间戳，`length` 单位为`秒` |
+| videoPath | 视频文件的保存地址，视频保存为`mp4`格式，地址字符串需要有`.mp4`后缀 |
+| success   | 下载成功回调，参数为文件保存地址                             |
+| progress  | 下载进度回调，参数为下载进度，取值范围为 0～100              |
+| failure   | 下载失败回调，参数为错误信息                                 |
+
+**接口说明**
+
+取消下载
+
+```objc
+- (void)cancelDownloadCloudVideo;
+```
+
+**接口说明**
+
+删除云存储数据，会同时删除视频和事件，目前只支持删除全天的云存储数据
+
+```objc
+- (void)deleteCloudVideoWithRange:(NSRange)timeRange success:(void(^)(void))success failure:(void(^)(NSError *error))failure;
+```
+
+**参数说明**
+
+| 参数      | 说明                                                         |
+| --------- | ------------------------------------------------------------ |
+| timeRange | 删除数据的时间范围，`location`为某一天 0 点的 UTC 时间戳，`length`为一天的秒数，可以使用 8 * 24 * 3600 |
+| success   | 云存储数据删除成功回调                                       |
+| failure   | 云存储数据删除失败回调，参数为错误信息。                     |
+
 
 
 **TuyaSmartCloudTimePieceModel 数据模型**

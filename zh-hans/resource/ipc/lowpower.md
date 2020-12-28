@@ -2,14 +2,17 @@
 
 ### 判断是否是低功耗门铃
 
-一个 IPC 设备，如果配置了 `149`  dp 点，就表示这个 IPC 设备是一个低功耗设备。在 IPC SDK 中，`149`  dp 点被定义为常量`TuyaSmartCameraWirelessAwakeDPName`。
+`TuyaSmartDeviceModel+IPCSDK`扩展中，为 `TuyaSmartDeviceModel`增加了判断设备是否是低功耗设备的接口。
+
+**接口说明**
+
+设备是否是低功耗设备
 
 ```objc
-// 是否是低功耗设备
-- (BOOL)isLowpowerDevice {
-		return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
-}
+- (BOOL)isLowPowerDevice;
 ```
+
+如果设备即是摄像机设备又是低功耗设备，可以认为设备是低功耗门铃。
 
 ### 休眠唤醒
 
@@ -40,18 +43,13 @@ ObjC
   	[self start];
 }
 
-// 是否是低功耗设备
-- (BOOL)isLowpowerDevice {
-    return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
-}
-
 - (void)start {
   	if (self.isConnected) {
 				[self.videoContainer addSubview:self.camera.videoView];
 				self.camera.videoView.frame = self.videoContainer.bounds;
         [self.camera startPreview];
 		}else if (!self.isConnecting) {
-      	if ([self isLowpowerDevice]) {
+      	if (self.device.deviceModel.isLowPowerDevice) {
         		[self.device awakeDeviceWithSuccess:nil failure:nil];
     		}
 				[self.camera connect];
@@ -74,14 +72,9 @@ func viewDidLoad() {
   	self.start()
 }
 
-// 判断是否是低功耗门铃
-func isLowpowerDevice() -> Bool {  
-    return self.dpManager?.isSupportDP(TuyaSmartCameraWirelessAwakeDPName)
-}
-
 func start() {
   	guard self.isConnected || self.isConnecting else {
-	    	if isDoorbell() {
+	    	if self.device?.deviceModel.isLowPowerDevice() {
           	self.device?.awake(success: nil, failure: nil)
         }
 				self.camera.connect()
