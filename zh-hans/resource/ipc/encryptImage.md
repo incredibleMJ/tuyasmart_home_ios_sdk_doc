@@ -54,6 +54,38 @@
 | -------------- | ------------ |
 | completedBlock | 加载完成回调 |
 
+### 加密图片下载
+
+使用 `TYEncryptImageDownloader` 类可以下载并解密图片数据，得到一个`UIImage`对象。
+
+**接口说明**
+
+```objc
+- (void)downloadEncryptImageWithPath:(NSString *)imagePath
+                          encryptKey:(NSString *)encryptKey
+                           completed:(nullable TYEncryptWebImageCompletionBlock)completedBlock;
+```
+
+**参数说明**
+
+| 参数           | 说明           |
+| -------------- | -------------- |
+| imagePath      | 加密图片的地址 |
+| encryptKey     | 图片加密的密钥 |
+| completedBlock | 下载结果回调   |
+
+**TYEncryptWebImageCompletionBlock 参数说明**
+
+| 参数  | 说明                                       |
+| ----- | ------------------------------------------ |
+| image | 图片对象，下载失败则为 `nil`               |
+| url   | 图片地址                                   |
+| from  | 图片来源，表示图片数据取自缓存还是云端下载 |
+| stage | 下载任务进行到哪一步结束的                 |
+| error | 错误信息，下载成功则为`nil`                |
+
+
+
 ## 报警消息
 
 报警消息中，图片附件`TuyaSmartCameraMessageModel.attachPic`的值由两部分组成，图片地址和加密密钥，以 “{path}@{key}” 的格式拼接。展示图片时，需要将这个字符串拆开。如果图片附件字符串的值，没有 “@{key}” 的后缀，则表示

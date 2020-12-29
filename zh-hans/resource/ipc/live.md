@@ -12,11 +12,27 @@ IPC SDK 提供智能摄像机的实时视频播放，设备存储卡录像播放
 
 **接口说明**
 
-开始连接 p2p 通道
+开始连接 p2p 通道，参数可以指定优先选择的连接模式，通过局域网连接或者通过外网连接，如果指定局域网连接优先，但是 App 和设备没有在同一个局域网内建立 TCP 连接，或者设备不支持局域网连接优先，SDK 会自动使用外网连接模式
 
 ```objc
-- (void)connect;
+- (void)connectWithMode:(TuyaSmartCameraConnectMode)mode;
 ```
+
+**参数说明**
+
+| 参数 | 说明               |
+| ---- | ------------------ |
+| mode | 优先使用的连接模式 |
+
+**TuyaSmartCameraConnectMode**
+
+| 枚举值                             | 说明           |
+| ---------------------------------- | -------------- |
+| TuyaSmartCameraConnectAuto         | 自动选择       |
+| TuyaSmartCameraConnectFromInternet | 外网连接优先   |
+| TuyaSmartCameraConnectFromLocal    | 局域网连接优先 |
+
+**接口说明**
 
 断开 p2p 通道
 
