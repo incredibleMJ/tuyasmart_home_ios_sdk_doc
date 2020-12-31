@@ -60,6 +60,8 @@
 
 **接口说明**
 
+下载加密图片
+
 ```objc
 - (void)downloadEncryptImageWithPath:(NSString *)imagePath
                           encryptKey:(NSString *)encryptKey

@@ -1,8 +1,10 @@
 ## 摄像机
 
-通过家庭获取到设备列表后，就可以根据设备的类型来判断是否是智能摄像机设备，如果是智能摄像机设备，则可以根据`TuyaSmartDeviceModel`中的信息来创建摄像机对象。IPC SDK 通过分类`TuyaSmartDeviceModel+IPCSDK`提供了几个针对摄像机设备的工具接口。
+通过家庭获取到设备列表后，就可以根据设备的类型来判断是否是智能摄像机设备，如果是智能摄像机设备，则可以根据`TuyaSmartDeviceModel`中的信息来创建摄像机对象。
 
 ### 判断是否是智能摄像机
+
+可以通过`TuyaSmartDeviceModel+IPCSDK`分类中的接口来判断设备是否是摄像机。
 
 **接口说明**
 
@@ -98,11 +100,11 @@ homeManager.getHomeList(success: { homeList in
 
 ### P2P 类型
 
-涂鸦智能摄像机支持三种 p2p 通道实现方案，IPC SDK 会根据 p2p 类型来初始化不同的摄像机具体实现的对象，通过下面的方式获取设备的 p2p 类型。3.22.0 版本开始，`TuyaSmartDeviceModel+IPCSDK` 增加获取 p2p 类型的接口。
+涂鸦智能摄像机支持三种 p2p 通道实现方案，IPC SDK 会根据 p2p 类型来初始化不同的摄像机具体实现的对象，通过`TuyaSmartDeviceModel+IPCSDK` 中的接口获取设备的 p2p 类型。
 
 **接口说明**
 
-获取 p2p 类型，3.22.0 版本开始支持
+获取 p2p 类型
 
 ```objc
 - (NSInteger)p2pType;

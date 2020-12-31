@@ -12,11 +12,27 @@ Before start playing the video, you need to connect the p2p channel. The connect
 
 **Declaration**
 
-Start connecting p2p channels.
+Start to connect to the p2p channel, the parameter can specify the preferred connection mode, connect through the LAN or through the internet, if the LAN connection is specified, but the App and the device do not establish a TCP connection in the same LAN, or the device does not support the priority of the LAN connection , SDK will automatically use internet connection mode.
 
 ``` objc
-- (void)connect;
+- (void)connectWithMode:(TuyaSmartCameraConnectMode)mode;
 ```
+
+**Parameters**
+
+| Parameter | Description               |
+| --------- | ------------------------- |
+| mode      | Preferred connection mode |
+
+**TuyaSmartCameraConnectMode**
+
+| Enum Value                         | Description                  |
+| ---------------------------------- | ---------------------------- |
+| TuyaSmartCameraConnectAuto         | Automatically choose         |
+| TuyaSmartCameraConnectFromInternet | Internet connection priority |
+| TuyaSmartCameraConnectFromLocal    | LAN connection priority      |
+
+
 
 **Declaration**
 

@@ -2,14 +2,17 @@
 
 ### Determine if it is a low-power device
 
-If an IPC device configured with `149` dp point, it means that the IPC is a low-power device. In the IPC SDK, the `149` dp point is defined as the constant `TuyaSmartCameraWirelessAwakeDPName`.
+Determine whether the device is a low-power device according to the interface in `TuyaSmartDeviceModel+IPCSDK`.
+
+**Declaration**
+
+Is it a low-power device.
 
 ```objc
-// is a low-power device
-- (BOOL)isLowpowerDevice {
-		return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
-}
+- (BOOL)isLowPowerDevice;
 ```
+
+If the device is both a camera device and a low-power device, the device can be considered a low-power doorbell.
 
 ### Sleep and wake
 
@@ -41,18 +44,13 @@ ObjC
   	[self start];
 }
 
-// Determine if it is a low power doorbell
-- (BOOL)isLowpowerDevice {
-    return [self.dpManager isSupportDP:TuyaSmartCameraWirelessAwakeDPName];
-}
-
 - (void)start {
   	if (self.isConnected) {
 				[self.videoContainer addSubview:self.camera.videoView];
 				self.camera.videoView.frame = self.videoContainer.bounds;
         [self.camera startPreview];
 		}else if (!self.isConnecting) {
-      	if ([self isLowpowerDevice]) {
+      	if (self.device.deviceModel.isLowPowerDevice) {
         		[self.device awakeDeviceWithSuccess:nil failure:nil];
     		}
 				[self.camera connect];
@@ -73,14 +71,9 @@ func viewDidLoad() {
   	self.start()
 }
 
-// Determine if it is a low power doorbell
-func isLowpowerDevice() -> Bool {
-    return self.dpManager?.isSupportDP(TuyaSmartCameraWirelessAwakeDPName)
-}
-
 func start() {
   	guard self.isConnected || self.isConnecting else {
-	    	if isDoorbell() {
+	    	if self.device?.deviceModel.isLowPowerDevice() {
           	self.device?.awake(success: nil, failure: nil)
         }
 				self.camera.connect()

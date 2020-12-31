@@ -130,6 +130,20 @@ Stop play.
 - (void)stopPlayback;
 ```
 
+**Description**
+
+Multiple speed playback
+
+```objc
+- (void)speedPlayWithPlayBackSpeed:(TuyaSmartCameraPlayBackSpeed)playBackSpeed;
+```
+
+**Parameters**
+
+| Parameter     | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| playBackSpeed | Playback speed, the specified playback peed needs device support |
+
 
 
 **Delegate Description**

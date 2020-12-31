@@ -141,6 +141,52 @@ Get the time slices of the video clips of some day.
 | success   | Success callback, return the time slices of videos |
 | failure   | Failure callback, error indicates an error message |
 
+**Declaration**
+
+Download cloud videos
+
+```objc
+- (void)downloadCloudVideoWithRange:(NSRange)timeRange
+                           filePath:(NSString *)videoPath
+                            success:(DownloadSuccess)success
+                           progress:(DownloadProgress)progress
+                            failure:(DownloadFailure)failure;
+```
+
+**Parameters**
+
+| Parameter | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| timeRange | The range of the video clip to be downloaded, `location` uses UTC timestamp, `length` unit is `second` |
+| videoPath | The storage path of the video file, the video is saved in the format of `mp4`, the address string needs to have a suffix of `.mp4` |
+| success   | Download success callback, the parameter is the file save path |
+| progress  | Download progress callback, the parameter is the download progress, the value range is 0～100 |
+| failure   | Download failed callback, the parameter is the error message |
+
+**Declaration**
+
+Cancel downloading.
+
+```objc
+- (void)cancelDownloadCloudVideo;
+```
+
+**Declaration**
+
+Deleting cloud storage data will delete videos and events at the same time. Currently, it only supports deleting all-day cloud storage data.
+
+```objc
+- (void)deleteCloudVideoWithRange:(NSRange)timeRange success:(void(^)(void))success failure:(void(^)(NSError *error))failure;
+```
+
+**Parameters**
+
+| Parameter | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| timeRange | The time range for deleting data, `location` is the UTC timestamp at 0 o'clock in a certain day, `length` is the number of seconds in a day, you can use 8 * 24 * 3600 |
+| success   | Cloud storage data deletion success callback                 |
+| failure   | Cloud storage data deletion failure callback, the parameter is an error message. |
+
 
 
 **TuyaSmartCloudTimePieceModel**

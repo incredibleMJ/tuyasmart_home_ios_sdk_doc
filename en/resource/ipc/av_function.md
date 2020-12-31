@@ -258,6 +258,28 @@ Video sound switch result delegate callback.
 | isMute    | Is muted    |
 | playMode  | Play mode   |
 
+**Declaration**
+
+Switch between speaker and earpiece mode. If the return value is not 0, it means the switch failed. P2p 1.0 does not support this interface.
+
+```objc
+- (int)enableSpeaker:(BOOL)enabled;
+```
+
+**Parameters**
+
+| Parameter | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| enabled   | `YES` to switch to speaker playback, `NO` to switch to earpiece playback |
+
+**Declaration**
+
+Get the current sound play mode, return `YES` means speaker play, `NO` means earpiece play, p2p 1.0 does not support this interface.
+
+```objc
+- (BOOL)speakerEnabled;
+```
+
 
 
 > After a play mode switch (switching between live video and video playback), the SDK does not retain the mute state of the previous playback mode.
@@ -617,4 +639,24 @@ Enable Object ounline function
 | Parameter | Description                        |
 | --------- | ---------------------------------- |
 | enable    | Whether to open the Object outline |
+
+### Device capability
+
+The `TuyaSmartCameraAbility` class can parse the configuration information of the device to obtain some basic capabilities of the device.
+
+| Property          | Description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| defaultDefinition | Default definition of live video                             |
+| videoNum          | The number of streams supported by the device. The value `1` indicates that the device only supports one definition, which is obtained through the `defaultDefinition` property, and the definition cannot be switched. When converted to `2`, it indicates that it supports both SD and HD |
+| isSupportSpeaker  | Whether the device supports speakers, if the device supports speakers, you can enable talking |
+| isSupportPickup   | Whether the device supports pickups, if the device supports pickups, the sound can be turned on when viewing the video stream on the App side |
+| rowData           | p2p config raw data                                          |
+
+**Declaration**
+
+To create a `TuyaSmartCameraAbility` object based on the device model, it needs to be called after the p2p connected. After the first p2p connection, this data will be cached in the local sandbox.
+
+```objc
++ (instancetype)cameraAbilityWithDeviceModel:(TuyaSmartDeviceModel *)deviceModel;
+```
 
