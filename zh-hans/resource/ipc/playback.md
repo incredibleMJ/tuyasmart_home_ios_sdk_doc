@@ -186,59 +186,7 @@
 - (void)cameraPlaybackDidFinished:(id<TuyaSmartCameraType>)camera;
 ```
 
-### 视频下载/删除
 
-通过 IPC SDK 可以将录制在设备存储卡中的回放视频下载到手机沙盒中，也可以通过 IPC SDK 删除设备存储卡上的回放视频，目前只支持删除一整天的视频，p2p 1.0 不支持下载和删除接口，调用将导致崩溃。
-
-**接口说明**
-
-下载存储卡回放视频，返回值为调用结果，返回值为 `0` 表示成功开始下载，否则开始下载失败
-
-```objc
-- (int)downloadPlayBackVideoWithRange:(NSRange)timeRange filePath:(NSString *)videoPath success:(void(^)(NSString *filePath))success progress:(void(^)(NSUInteger progress))progress failure:(void(^)(NSError *error))failure;
-```
-
-**参数说明**
-
-| 参数      | 说明                                                         |
-| --------- | ------------------------------------------------------------ |
-| timeRange | 需要下载的视频片段的范围，`location` 使用 UTC 时间戳，`length` 单位为`秒` |
-| videoPath | 视频文件的保存地址，视频保存为`mp4`格式，地址字符串需要有`.mp4`后缀 |
-| success   | 下载成功回调，参数为视频文件的保存地址                       |
-| progress  | 下载进度回调，参数为下载进度，取值范围为 0～100              |
-| failure   | 下载失败回调，参数为错误信息                                 |
-
-**接口说明**
-
-停止下载，返回值不为 0 表示操作失败，已下载的视频数据不会被删除，但可能无效
-
-```objc
-- (int)stopPlayBackDownloadWithResponse:(void (^)(int errCode))callback;
-```
-
-**参数说明**
-
-| 参数     | 说明                                        |
-| -------- | ------------------------------------------- |
-| callback | 停止下载结果回调，参数不等于 0 表示操作失败 |
-
-**接口说明**
-
-删除某一天的回放视频，返回值不为 0 ，表示操作失败，设备存储卡上的视频文件不会收到影响
-
-```objc
-- (int)deletePlayBackDataWithDay:(NSString *)day onResponse:(void (^)(int errCode))callback onFinish:(void (^)(int errCode))finishedCallBack;
-```
-
-**参数说明**
-
-| 参数             | 说明                                                  |
-| ---------------- | ----------------------------------------------------- |
-| day              | 日期字符串，格式为`YYYYMMdd`                          |
-| callback         | 命令下发结果回调，参数为 0 表示下发成功               |
-| finishedCallBack | 删除结束回调，参数为 0 表示成功删除指定日期的回放视频 |
-
-> 不管是命令下发结果回调还是删除结束回调，如果参数不为 0 ，删除失败，但无法确定设备端存储卡中的视频文件状态。可以重新获取回放视频数据来确定视频文件是否被删除。
 
 #### 连续播放
 

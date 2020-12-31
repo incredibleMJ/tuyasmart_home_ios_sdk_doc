@@ -646,3 +646,23 @@ if ([self.dpManager isSupportDP:@"198"]) {
 | ------ | ---------------- |
 | enable | 是否开启智能画框 |
 
+### 设备能力
+
+`TuyaSmartCameraAbility`类，可以解析设备的配置信息，从而获取设备的一些基础能力。
+
+| 属性              | 说明                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| defaultDefinition | 实时视频播放的默认清晰度                                     |
+| videoNum          | 设备支持的码流数，值为 `1` 表示设备只支持一种清晰度，通过`defaultDefinition` 属性获取，无法切换清晰度，值为 `2`表示支持标清和高清两种清晰度 |
+| isSupportSpeaker  | 设备是否支持扬声器，如果设备支持扬声器，则可以开启讲话       |
+| isSupportPickup   | 设备是否支持拾音器，如果设备支持拾音器，则 App 端查看视频流时可以开启声音 |
+| rowData           | p2p config 原始数据                                          |
+
+**接口说明**
+
+根据设备数据模型创建设备能力类对象，需要 p2p 连接之后调用，第一次 p2p 连接之后，本地沙盒中会缓存此数据。
+
+```objc
++ (instancetype)cameraAbilityWithDeviceModel:(TuyaSmartDeviceModel *)deviceModel;
+```
+

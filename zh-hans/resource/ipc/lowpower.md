@@ -2,7 +2,7 @@
 
 ### 判断是否是低功耗门铃
 
-`TuyaSmartDeviceModel+IPCSDK`扩展中，为 `TuyaSmartDeviceModel`增加了判断设备是否是低功耗设备的接口。
+根据`TuyaSmartDeviceModel+IPCSDK`中的接口判断设备是否为低功耗设备。
 
 **接口说明**
 

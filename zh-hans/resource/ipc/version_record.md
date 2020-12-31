@@ -21,17 +21,14 @@
 | TuyaCameraSDK       | 3.22.0 |
 | TuyaSmartCameraBase | 4.22.0 |
 | TuyaSmartCameraM    | 4.22.0 |
+| TuyaSmartCameraT    | 4.22.0 |
 | TuyaSmartCameraKit  | 4.22.0 |
 | TYEncryptImage      | 4.22.0 |
 
 **更新说明**
 
-* 摄像机对象创建流程简化，开发者不再需要使用 open api 获取 p2p 配置信息。
-* 增加 `TuyaSmartDeviceModel+IPCSDK`扩展，提供辅助方法。
-* 增加 p2p 局域网连接模式。
-* 增加 NVR 子设备支持。
+* 摄像机对象创建流程简化。
 * 声音播放提供切换扬声器与听筒播放模式的切换。
-* 增加存储卡回放视频下载和删除方法。
 * 增加存储卡回放视频倍数播放方法。
 * 增加云存储下载和删除方法。
 * 支持加密图片的直接下载。

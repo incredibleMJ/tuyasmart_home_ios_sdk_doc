@@ -54,6 +54,40 @@ Display encrypted image, and set a callback function that called when image down
 | -------------- | ----------------- |
 | completedBlock | Callback function |
 
+### Encrypted image download
+
+Use the `TYEncryptImageDownloader` class to download and decrypt the image data and get a `UIImage` object.
+
+**Declaration**
+
+Download encrypted image.
+
+```objc
+- (void)downloadEncryptImageWithPath:(NSString *)imagePath
+                          encryptKey:(NSString *)encryptKey
+                           completed:(nullable TYEncryptWebImageCompletionBlock)completedBlock;
+```
+
+**Parameters**
+
+| Parameter      | Description                             |
+| -------------- | --------------------------------------- |
+| imagePath      | The url string of the encrypted picture |
+| encryptKey     | Image encryption key                    |
+| completedBlock | Download result callback                |
+
+**TYEncryptWebImageCompletionBlock Parameters**
+
+| Parameter | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| image     | Image object, `nil` if download fails                        |
+| url       | Url string of image                                          |
+| from      | Image source, indicating whether the image data is taken from the cache or downloaded from the cloud |
+| stage     | Whitch step did the download task end                        |
+| error     | Error information, `nil` if download success                 |
+
+
+
 ## Alarm Message
 
 In the alarm message, the value of the picture attachment `TuyaSmartCameraMessageModel.attachPic` consists of two parts, the picture url path and the encryption key, which are spliced in the format of "{path}@{key}". When displaying the picture, you need to split this string with "@". If the value of the picture attachment string does not have the suffix "@{key}", it means that the picture is not encrypted.

@@ -8,10 +8,30 @@
 | v1.1.0  | Update      | FuLang | 2020-06-05 |
 | v1.1.1  | Update      | FuLang | 2020-07-31 |
 | v1.2.0  | Update      | FuLang | 2020-11-14 |
+| v1.3.0  | Update      | FuLang | 2020-12-30 |
 
 
 
 ## SDK change log
+
+### 3.22.0 (2020-12-30)
+
+| 模块                | 版本   |
+| ------------------- | ------ |
+| TuyaCameraSDK       | 3.22.0 |
+| TuyaSmartCameraBase | 4.22.0 |
+| TuyaSmartCameraM    | 4.22.0 |
+| TuyaSmartCameraT    | 4.22.0 |
+| TuyaSmartCameraKit  | 4.22.0 |
+| TYEncryptImage      | 4.22.0 |
+
+**更新说明**
+
+* The camera object creation process is simplified.
+* Sound playback provides switching between speaker and earpiece playback modes.
+* Add the multiple playback method of the memory card playback video.
+* Add cloud storage download and delete methods.
+* Supports direct download of encrypted pictures.
 
 ### 3.20.0 (2020-11-14)
 
