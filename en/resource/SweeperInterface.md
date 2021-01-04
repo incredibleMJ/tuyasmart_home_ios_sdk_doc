@@ -55,7 +55,7 @@
 
 ### Get Record List
 
-**API：** m.smart.scale.history.get.list
+**API：** tuya.m.sweeper.cleaning.history.get
 
 **Version：** 1.0
 
@@ -66,7 +66,8 @@
 | devId     | String  | Device Id                                                  |
 | offset    | Integer | Paging offset                                              |
 | limit     | Integer | Paging Size                                                |
-| dpIds     | String  | The dpId of the cleaning record configured on the Tuya Iot |
+| startTime  | Long  | Start time |
+| endTime  | Long  | End Time |
 
 **Response parameters**
 
@@ -157,7 +158,7 @@
 
 ### Delete Record
 
-**API：** m.smart.scale.history.delete
+**API：** tuya.m.sweeper.cleaning.history.delete
 
 **Version：** 1.0
 

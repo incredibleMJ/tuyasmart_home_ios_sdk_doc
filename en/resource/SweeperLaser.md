@@ -378,7 +378,7 @@ sweeperDevice?.removeAllHistoryData(success: {
 
 
 
-### Get History Sweep Rcords (multi-map)
+### Get Multi-category Map Data
 
 **Declaration**
 
@@ -428,7 +428,7 @@ sweeperDevice?.getSweeperMultiHistoryData(withLimit: 50, offset: 0, success: { (
 
 
 
-### Clear History Sweep Records (multiple maps)
+### Clear Multi-category Map Data
 
 **Declaration**
 

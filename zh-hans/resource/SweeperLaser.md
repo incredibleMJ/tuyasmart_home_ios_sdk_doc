@@ -378,7 +378,7 @@ sweeperDevice?.removeAllHistoryData(success: {
 
 
 
-### 获取历史清扫记录（多地图）
+### 获取多楼层地图数据
 
 **接口说明**
 
@@ -428,7 +428,7 @@ sweeperDevice?.getSweeperMultiHistoryData(withLimit: 50, offset: 0, success: { (
 
 
 
-### 清空历史清扫记录（多地图）
+### 清空多楼层地图数据
 
 **接口说明**
 
