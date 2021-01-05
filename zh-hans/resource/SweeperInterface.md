@@ -57,7 +57,7 @@
 
 ### 历史清扫记录列表
 
-**接口：** m.smart.scale.history.get.list
+**接口：** tuya.m.sweeper.cleaning.history.get
 
 **版本：** 1.0
 
@@ -68,7 +68,8 @@
 | devId  | String  | 设备 Id                        |
 | offset | Integer | 分页偏移量                     |
 | limit  | Integer | 分页大小                       |
-| dpIds  | String  | 在涂鸦平台配置的清扫记录的dpId |
+| startTime  | Long  | 开始时间 |
+| endTime  | Long  | 结束时间 |
 
 **响应参数**
 
@@ -159,7 +160,7 @@
 
 ### 删除历史清扫记录
 
-**接口：** m.smart.scale.history.delete
+**接口：** tuya.m.sweeper.cleaning.history.delete
 
 **版本：** 1.0
 
