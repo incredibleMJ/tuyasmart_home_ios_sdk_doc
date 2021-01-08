@@ -1,5 +1,11 @@
 ## 更新日志
 
+### 2.0.0 (2021-01-08)
+
+依赖最新版本 `pod 'TuyaSmartDeviceKit'`
+
+
+
 ### 1.2.5 (2020-07-04)
 
 依赖最新版本 `pod 'TuyaSmartDeviceKit'`
