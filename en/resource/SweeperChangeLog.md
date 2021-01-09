@@ -1,5 +1,11 @@
 ## Change Log
 
+### 2.0.0 (2021-01-08)
+
+Dependency `pod 'TuyaSmartDeviceKit'`
+
+
+
 ### 1.2.5 (2020-07-04)
 
 Dependency `pod 'TuyaSmartDeviceKit'`
